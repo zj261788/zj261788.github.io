@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="Canvas （画布）Canvas 是 HTML5 中新出的一个元素，开发者可以在上面绘制一系列图形 css的盒子模型描述：常见的内容(content),内边距(padding),外边距(margin),边框(border),css都具备这些属性，而这些属性在我们日常生活中遇见的事物比如盒子作一个比较来理解所以叫它css盒子模型 html5应用程序缓存和浏览器缓存的区别水平垂直居中 利用定位＋ma">
+<meta property="og:type" content="article">
+<meta property="og:title" content="宝典">
+<meta property="og:url" content="http://example.com/2022/07/07/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Jie Growth Diary">
+<meta property="og:description" content="Canvas （画布）Canvas 是 HTML5 中新出的一个元素，开发者可以在上面绘制一系列图形 css的盒子模型描述：常见的内容(content),内边距(padding),外边距(margin),边框(border),css都具备这些属性，而这些属性在我们日常生活中遇见的事物比如盒子作一个比较来理解所以叫它css盒子模型 html5应用程序缓存和浏览器缓存的区别水平垂直居中 利用定位＋ma">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-26T06:35:44.497Z">
+<meta property="article:author" content="Zhang Jie">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/07/07/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>宝典 | Jie Growth Diary</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jie Growth Diary</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录生活中的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/07/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.jpg">
+      <meta itemprop="name" content="Zhang Jie">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jie Growth Diary">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          宝典
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-07 00:00:00" itemprop="dateCreated datePublished" datetime="2022-07-07T00:00:00+08:00">2022-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-26 14:35:44" itemprop="dateModified" datetime="2022-09-26T14:35:44+08:00">2022-09-26</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Canvas-（画布）"><a href="#Canvas-（画布）" class="headerlink" title="Canvas （画布）"></a>Canvas （画布）</h1><p>Canvas 是 HTML5 中新出的一个元素，开发者可以在上面绘制一系列图形</p>
+<h1 id="css的盒子模型"><a href="#css的盒子模型" class="headerlink" title="css的盒子模型"></a>css的盒子模型</h1><p>描述：常见的内容(content),内边距(padding),外边距(margin),边框(border),css都具备这些属性，而这些属性在我们日常生活中遇见的事物比如盒子作一个比较来理解所以叫它css盒子模型</p>
+<h1 id="html5应用程序缓存和浏览器缓存的区别"><a href="#html5应用程序缓存和浏览器缓存的区别" class="headerlink" title="html5应用程序缓存和浏览器缓存的区别"></a>html5应用程序缓存和浏览器缓存的区别</h1><h1 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h1><ol>
+<li>利用定位＋margin<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 父级<span class="selector-tag">div</span> --&gt;</span><br><span class="line"><span class="attribute">position</span>:relative;</span><br><span class="line"><span class="attribute">height</span>:<span class="number">200px</span>;</span><br><span class="line"><span class="attribute">width</span>:<span class="number">200px</span>;</span><br><span class="line">&lt;!-- 子级<span class="selector-tag">div</span> --&gt;</span><br><span class="line"><span class="attribute">position</span>:absolute;</span><br><span class="line"><span class="attribute">top</span>:<span class="number">0</span>;</span><br><span class="line"><span class="attribute">bottom</span>:<span class="number">0</span>;</span><br><span class="line"><span class="attribute">left</span>:<span class="number">0</span>;</span><br><span class="line"><span class="attribute">right</span>:<span class="number">0</span>;</span><br><span class="line"><span class="attribute">margin</span>:auto;</span><br><span class="line"><span class="attribute">width</span>:<span class="number">100px</span>;</span><br><span class="line"><span class="attribute">height</span>:<span class="number">100px</span>;</span><br></pre></td></tr></table></figure></li>
+<li>定位＋transform<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 父级div --&gt;</span></span><br><span class="line">position:relative;</span><br><span class="line">width:200px;</span><br><span class="line">heigth:200px;</span><br><span class="line"><span class="comment">&lt;!-- 子级div --&gt;</span></span><br><span class="line">position:absolute;</span><br><span class="line">top:50%;</span><br><span class="line">left:50%;</span><br><span class="line">transform:translate(-50%,50%);</span><br><span class="line">width:100px;</span><br><span class="line">heigth:100px;</span><br></pre></td></tr></table></figure></li>
+<li>使用flex<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 父级div --&gt;</span></span><br><span class="line">display:flex;</span><br><span class="line">justify-content:center;</span><br><span class="line">align-items:center;</span><br><span class="line">width:200px;</span><br><span class="line">height:200px;</span><br><span class="line"><span class="comment">&lt;!-- 子级div --&gt;</span></span><br><span class="line">width:100px;</span><br><span class="line">height:100px&#x27;</span><br></pre></td></tr></table></figure></li>
+<li>利用grid<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 父级div --&gt;</span></span><br><span class="line">display: grid;</span><br><span class="line">justify-content: center;</span><br><span class="line">align-items: center;</span><br><span class="line">width: 200px;</span><br><span class="line">height: 200px;</span><br><span class="line"><span class="comment">&lt;!-- 子级div --&gt;</span></span><br><span class="line">width: 100px;</span><br><span class="line">height: 100px;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="ajax的工作原理"><a href="#ajax的工作原理" class="headerlink" title="ajax的工作原理"></a>ajax的工作原理</h1><p>是通过XmlHttpRequest的对象来向服务器发起异步请求，从服务器中获得数据，然后用Javascript来操作DOM从而更新局部页面</p>
+<h1 id="浏览器内多标签页怎么通讯"><a href="#浏览器内多标签页怎么通讯" class="headerlink" title="浏览器内多标签页怎么通讯"></a>浏览器内多标签页怎么通讯</h1><ol>
+<li>使用websocket协议,可以实现服务器推送，所以服务器就可以用来当做这个中介者。标签页通过向服务器发送数据，然后由服务器向其他标签页推送转发。</li>
+<li>使用ShareWorker的方式，shareworker会在页面存在的生命周期内创建一个唯一的线程，并且开启多个页面也只会使用同一个线程。这个时候共享线程就是充当中介者的角色。标签页间通过共享一个线程，然后通过这个共享的线程来实现数据的交换。</li>
+<li>使用localStorage，我们可以在一个标签页对locaStorage的变化事件进行监听，然后当另一个标签页修改数据的时候，我们就可以通过这个监听事件来获取到数据。</li>
+<li>使用postMessage方法，如果我们能获得对应标签的引用，就可以使用postMessage方法进行通讯。</li>
+</ol>
+<h1 id="不使用border画出1px的线"><a href="#不使用border画出1px的线" class="headerlink" title="不使用border画出1px的线"></a>不使用border画出1px的线</h1><ol>
+<li>div<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">&quot;height:1px;overflow:hidden;background:red&quot;</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure></li>
+<li>hr<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;hr <span class="attribute">size</span>=<span class="string">&quot;1&quot;</span>&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="css3有哪些新特性"><a href="#css3有哪些新特性" class="headerlink" title="css3有哪些新特性"></a>css3有哪些新特性</h1><h1 id="use-strict-是什么，使用它区别"><a href="#use-strict-是什么，使用它区别" class="headerlink" title="use strict 是什么，使用它区别"></a>use strict 是什么，使用它区别</h1><ol>
+<li><p>变量必须声明后再使用</p>
+</li>
+<li><p>在使用默认参数的函数中的参数不能有同名属性，否则报错，在同一作用域中不能有同名参数</p>
+</li>
+<li><p>增加了保留字（比如protected、static和interface）</p>
+</li>
+<li><p>禁止this指向全局对象</p>
+</li>
+<li><p>不能对只读属性赋值，否则报错</p>
+</li>
+<li><p>不能使用前缀0表示八进制数，否则报错（用0O表示）</p>
+</li>
+<li><p>不能删除不可删除的属性，否则报错</p>
+</li>
+<li><p>不能使用with语句(with语句接收的对象会添加到作用域链的前端并在代码执行完之后移除)（ with(obj) ）</p>
+</li>
+<li><p>eval不会在它的外层作用域引入变量 ( eval(str) )</p>
+</li>
+<li><p> eval和arguments不能被重新赋值</p>
+</li>
+<li><p>arguments不会自动反映函数参数的变化</p>
+</li>
+<li><p>不能使用arguments.callee</p>
+</li>
+<li><p>不能使用arguments.caller</p>
+</li>
+<li><p>不能使用fn.caller和fn.arguments获取函数调用的堆栈</p>
+</li>
+<li><p>不能删除变量delete prop，会报错，只能删除属性delete global[prop]</p>
+</li>
+</ol>
+<h1 id="htm5有哪些新特新除了哪些元素"><a href="#htm5有哪些新特新除了哪些元素" class="headerlink" title="htm5有哪些新特新除了哪些元素"></a>htm5有哪些新特新除了哪些元素</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">新特性：</span><br><span class="line">     <span class="selector-tag">a</span>. HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加</span><br><span class="line">     <span class="selector-tag">b</span>. 拖拽释放(Drag and drop) API</span><br><span class="line">     c. 语义化更好的内容标签（<span class="selector-tag">header</span>,<span class="selector-tag">nav</span>,<span class="selector-tag">footer</span>,<span class="selector-tag">aside</span>,<span class="selector-tag">article</span>,<span class="selector-tag">section</span>）</span><br><span class="line">     d. 音频、视频API(<span class="selector-tag">audio</span>,<span class="selector-tag">video</span>)</span><br><span class="line">     e. 画布(<span class="selector-tag">Canvas</span>) API</span><br><span class="line">     f. 地理(Geolocation) API</span><br><span class="line">     g. 本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失</span><br><span class="line">     h. sessionStorage 的数据在页面会话结束时会被清除</span><br><span class="line">     <span class="selector-tag">i</span>. 表单控件，calendar、date、<span class="selector-tag">time</span>、email、url、search</span><br><span class="line">     j. 新的技术webworker, websocket等</span><br><span class="line">移除的元素：</span><br><span class="line">     k. 纯表现的元素：basefont，big，center, s，strike，tt，u</span><br><span class="line">     l. 对可用性产生负面影响的元素：frame，frameset，noframes</span><br></pre></td></tr></table></figure>
+<h1 id="如何处理html5新标签在浏览器兼容性问题"><a href="#如何处理html5新标签在浏览器兼容性问题" class="headerlink" title="如何处理html5新标签在浏览器兼容性问题"></a>如何处理html5新标签在浏览器兼容性问题</h1><h1 id="如何处理区分html和html5"><a href="#如何处理区分html和html5" class="headerlink" title="如何处理区分html和html5"></a>如何处理区分html和html5</h1><h1 id="vue双向绑定的原理"><a href="#vue双向绑定的原理" class="headerlink" title="vue双向绑定的原理"></a>vue双向绑定的原理</h1><h1 id="来谈一谈你对vue项目做了哪些优化"><a href="#来谈一谈你对vue项目做了哪些优化" class="headerlink" title="来谈一谈你对vue项目做了哪些优化"></a>来谈一谈你对vue项目做了哪些优化</h1><h1 id="生拷贝和浅拷贝的区别"><a href="#生拷贝和浅拷贝的区别" class="headerlink" title="生拷贝和浅拷贝的区别"></a>生拷贝和浅拷贝的区别</h1><h1 id="Cookie、sessionStorage、localStorage的区别"><a href="#Cookie、sessionStorage、localStorage的区别" class="headerlink" title="Cookie、sessionStorage、localStorage的区别"></a>Cookie、sessionStorage、localStorage的区别</h1><h1 id="data中可以返回对象吗"><a href="#data中可以返回对象吗" class="headerlink" title="data中可以返回对象吗"></a>data中可以返回对象吗</h1><h1 id="绘制和重排有了解吗"><a href="#绘制和重排有了解吗" class="headerlink" title="绘制和重排有了解吗"></a>绘制和重排有了解吗</h1><h1 id="数组有哪些方法"><a href="#数组有哪些方法" class="headerlink" title="数组有哪些方法"></a>数组有哪些方法</h1><h1 id="es6中let，const-var的区别"><a href="#es6中let，const-var的区别" class="headerlink" title="es6中let，const,var的区别"></a>es6中let，const,var的区别</h1><h1 id="es6箭头函数和普通函数的区别"><a href="#es6箭头函数和普通函数的区别" class="headerlink" title="es6箭头函数和普通函数的区别"></a>es6箭头函数和普通函数的区别</h1><h1 id="vue2和vue3的区别"><a href="#vue2和vue3的区别" class="headerlink" title="vue2和vue3的区别"></a>vue2和vue3的区别</h1><h1 id="数组排序有哪些方法"><a href="#数组排序有哪些方法" class="headerlink" title="数组排序有哪些方法"></a>数组排序有哪些方法</h1><h1 id="如下那种前端构建技术可以剔除javascripc中没有被使用的代码"><a href="#如下那种前端构建技术可以剔除javascripc中没有被使用的代码" class="headerlink" title="如下那种前端构建技术可以剔除javascripc中没有被使用的代码"></a>如下那种前端构建技术可以剔除javascripc中没有被使用的代码</h1><p>code Splitting可以将代码分成多个捆绑包，然后可以按需或并行加载；source Mapping是从已转换的代码映射到原始源的文件，使浏览器能够重构原始源并在调试器中重建的原始源</p>
+<h1 id="怎么解决回调地狱"><a href="#怎么解决回调地狱" class="headerlink" title="怎么解决回调地狱"></a>怎么解决回调地狱</h1><p>使用async await可以解决</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">timer</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="title function_">inittime</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">timer</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="js中数组里面的相同的元素如何去重"><a href="#js中数组里面的相同的元素如何去重" class="headerlink" title="js中数组里面的相同的元素如何去重"></a>js中数组里面的相同的元素如何去重</h1><ol>
+<li>这个数组里面的数据类型一致吗</li>
+<li>对象一致判定的原则是什么，数组一致判定的标准是什么<h1 id="vuex中的数据在页面刷新以后消失怎么办"><a href="#vuex中的数据在页面刷新以后消失怎么办" class="headerlink" title="vuex中的数据在页面刷新以后消失怎么办"></a>vuex中的数据在页面刷新以后消失怎么办</h1>自己手动保存在localStorage或sessionStorage或者直接使用社区的vuew-persist或者vuex-persistedstate</li>
+</ol>
+<h1 id="vue中keep-alive的作用"><a href="#vue中keep-alive的作用" class="headerlink" title="vue中keep-alive的作用"></a>vue中keep-alive的作用</h1><p>keep-alive用来缓存组件，避免多次加载相应的组件减少性能消耗<br>简单来说使用了keep-alive的页面，第二次进入的时候只会渲染第一次渲染好的页面数据，除非刷新页面才渲染新数据才执行created等钩子函数否则只能用activated和deactived这两个生命钩子来得知当前组件是否处于活动状态</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>请我喝杯咖啡</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/img/weix.png" alt="Zhang Jie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/img/zhifubaio.jpg" alt="Zhang Jie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Zhang Jie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2022/07/07/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/" title="宝典">http://example.com/2022/07/07/面试笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/04/%E5%B7%A5%E5%85%B7%E6%B7%B7%E5%85%A5/" rel="prev" title="工具混入">
+      <i class="fa fa-chevron-left"></i> 工具混入
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/07/14/vueConfigJs/" rel="next" title="vue">
+      vue <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Canvas-%EF%BC%88%E7%94%BB%E5%B8%83%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Canvas （画布）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#css%E7%9A%84%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">css的盒子模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#html5%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%BC%93%E5%AD%98%E5%92%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">html5应用程序缓存和浏览器缓存的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD"><span class="nav-number">4.</span> <span class="nav-text">水平垂直居中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ajax%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">ajax的工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E5%A4%9A%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%80%8E%E4%B9%88%E9%80%9A%E8%AE%AF"><span class="nav-number">6.</span> <span class="nav-text">浏览器内多标签页怎么通讯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E4%BD%BF%E7%94%A8border%E7%94%BB%E5%87%BA1px%E7%9A%84%E7%BA%BF"><span class="nav-number">7.</span> <span class="nav-text">不使用border画出1px的线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#css3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-number">8.</span> <span class="nav-text">css3有哪些新特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#use-strict-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E4%BD%BF%E7%94%A8%E5%AE%83%E5%8C%BA%E5%88%AB"><span class="nav-number">9.</span> <span class="nav-text">use strict 是什么，使用它区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#htm5%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%96%B0%E9%99%A4%E4%BA%86%E5%93%AA%E4%BA%9B%E5%85%83%E7%B4%A0"><span class="nav-number">10.</span> <span class="nav-text">htm5有哪些新特新除了哪些元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86html5%E6%96%B0%E6%A0%87%E7%AD%BE%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">11.</span> <span class="nav-text">如何处理html5新标签在浏览器兼容性问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%8C%BA%E5%88%86html%E5%92%8Chtml5"><span class="nav-number">12.</span> <span class="nav-text">如何处理区分html和html5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">13.</span> <span class="nav-text">vue双向绑定的原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9D%A5%E8%B0%88%E4%B8%80%E8%B0%88%E4%BD%A0%E5%AF%B9vue%E9%A1%B9%E7%9B%AE%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8C%96"><span class="nav-number">14.</span> <span class="nav-text">来谈一谈你对vue项目做了哪些优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">15.</span> <span class="nav-text">生拷贝和浅拷贝的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cookie%E3%80%81sessionStorage%E3%80%81localStorage%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">16.</span> <span class="nav-text">Cookie、sessionStorage、localStorage的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#data%E4%B8%AD%E5%8F%AF%E4%BB%A5%E8%BF%94%E5%9B%9E%E5%AF%B9%E8%B1%A1%E5%90%97"><span class="nav-number">17.</span> <span class="nav-text">data中可以返回对象吗</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%92%8C%E9%87%8D%E6%8E%92%E6%9C%89%E4%BA%86%E8%A7%A3%E5%90%97"><span class="nav-number">18.</span> <span class="nav-text">绘制和重排有了解吗</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95"><span class="nav-number">19.</span> <span class="nav-text">数组有哪些方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#es6%E4%B8%ADlet%EF%BC%8Cconst-var%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">20.</span> <span class="nav-text">es6中let，const,var的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#es6%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%92%8C%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">21.</span> <span class="nav-text">es6箭头函数和普通函数的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue2%E5%92%8Cvue3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">22.</span> <span class="nav-text">vue2和vue3的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95"><span class="nav-number">23.</span> <span class="nav-text">数组排序有哪些方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%B8%8B%E9%82%A3%E7%A7%8D%E5%89%8D%E7%AB%AF%E6%9E%84%E5%BB%BA%E6%8A%80%E6%9C%AF%E5%8F%AF%E4%BB%A5%E5%89%94%E9%99%A4javascripc%E4%B8%AD%E6%B2%A1%E6%9C%89%E8%A2%AB%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="nav-number">24.</span> <span class="nav-text">如下那种前端构建技术可以剔除javascripc中没有被使用的代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E5%9B%9E%E8%B0%83%E5%9C%B0%E7%8B%B1"><span class="nav-number">25.</span> <span class="nav-text">怎么解决回调地狱</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js%E4%B8%AD%E6%95%B0%E7%BB%84%E9%87%8C%E9%9D%A2%E7%9A%84%E7%9B%B8%E5%90%8C%E7%9A%84%E5%85%83%E7%B4%A0%E5%A6%82%E4%BD%95%E5%8E%BB%E9%87%8D"><span class="nav-number">26.</span> <span class="nav-text">js中数组里面的相同的元素如何去重</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vuex%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%9C%A8%E9%A1%B5%E9%9D%A2%E5%88%B7%E6%96%B0%E4%BB%A5%E5%90%8E%E6%B6%88%E5%A4%B1%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="nav-number">27.</span> <span class="nav-text">vuex中的数据在页面刷新以后消失怎么办</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue%E4%B8%ADkeep-alive%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">28.</span> <span class="nav-text">vue中keep-alive的作用</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhang Jie"
+      src="/img/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zhang Jie</p>
+  <div class="site-description" itemprop="description">直到这一刻微笑着说话为止，我至少留下了一公升眼泪</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zj261788" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zj261788" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zj2811932734@qq.com@gmail.com" title="E-Mail → mailto:zj2811932734@qq.com@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5544262132/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;5544262132&#x2F;profile?rightmod&#x3D;1&amp;wvr&#x3D;6&amp;mod&#x3D;personinfo&amp;is_all&#x3D;1" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://myaccount.google.com/?utm_source=OGB&utm_medium=act" title="Google → https:&#x2F;&#x2F;myaccount.google.com&#x2F;?utm_source&#x3D;OGB&amp;utm_medium&#x3D;act" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Jie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">143k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:10</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.3' zIndex='-1' count='50' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

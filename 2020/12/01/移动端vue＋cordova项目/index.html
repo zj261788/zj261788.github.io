@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="cordova打包环境配置 下载软件1android-studio-2020.3.1.24-window下载地址 https:&#x2F;&#x2F;developer.android.com&#x2F; 软件安装1234在D盘新建目录Android，在建两个之文件夹Android Studioh和Sdkandroid-studio-2020.3.1.24-windows安装在Android StudiohSdk文件用来装安卓">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动端vue＋cordova项目">
+<meta property="og:url" content="http://example.com/2020/12/01/%E7%A7%BB%E5%8A%A8%E7%AB%AFvue%EF%BC%8Bcordova%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:site_name" content="Jie Growth Diary">
+<meta property="og:description" content="cordova打包环境配置 下载软件1android-studio-2020.3.1.24-window下载地址 https:&#x2F;&#x2F;developer.android.com&#x2F; 软件安装1234在D盘新建目录Android，在建两个之文件夹Android Studioh和Sdkandroid-studio-2020.3.1.24-windows安装在Android StudiohSdk文件用来装安卓">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/7.png">
+<meta property="og:image" content="http://example.com/img/10.png">
+<meta property="og:image" content="http://example.com/img/8.png">
+<meta property="og:image" content="http://example.com/img/12.png">
+<meta property="og:image" content="http://example.com/img/9.png">
+<meta property="og:image" content="http://example.com/img/11.png">
+<meta property="og:image" content="http://example.com/img/13.png">
+<meta property="article:published_time" content="2020-11-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-26T06:35:44.497Z">
+<meta property="article:author" content="Zhang Jie">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/7.png">
+
+<link rel="canonical" href="http://example.com/2020/12/01/%E7%A7%BB%E5%8A%A8%E7%AB%AFvue%EF%BC%8Bcordova%E9%A1%B9%E7%9B%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>移动端vue＋cordova项目 | Jie Growth Diary</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jie Growth Diary</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录生活中的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/01/%E7%A7%BB%E5%8A%A8%E7%AB%AFvue%EF%BC%8Bcordova%E9%A1%B9%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.jpg">
+      <meta itemprop="name" content="Zhang Jie">
+      <meta itemprop="description" content="直到这一刻微笑着说话为止，我至少留下了一公升眼泪">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jie Growth Diary">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          移动端vue＋cordova项目
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-01T00:00:00+08:00">2020-12-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-26 14:35:44" itemprop="dateModified" datetime="2022-09-26T14:35:44+08:00">2022-09-26</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="cordova打包环境配置"><a href="#cordova打包环境配置" class="headerlink" title="cordova打包环境配置"></a>cordova打包环境配置</h1><ol>
+<li>下载软件<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">android</span>-studio-<span class="number">2020</span>.<span class="number">3</span>.<span class="number">1</span>.<span class="number">24</span>-window下载地址 https://developer.android.com/</span><br></pre></td></tr></table></figure></li>
+<li>软件安装<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在D盘新建目录<span class="keyword">Android，</span></span><br><span class="line"><span class="keyword"></span>在建两个之文件夹<span class="keyword">Android </span>Studioh和Sdk</span><br><span class="line"><span class="keyword">android-studio-2020.3.1.24-windows安装在Android </span>Studioh</span><br><span class="line">Sdk文件用来装安卓sdk（安卓sdk在<span class="keyword">android-studio-2020.3.1.24-window软件里下载）</span></span><br></pre></td></tr></table></figure></li>
+<li>安卓环境配置</li>
+</ol>
+<ul>
+<li>安卓环境<br><img src="/../img/7.png" alt="最外层"><br><img src="/../img/10.png" alt="path里面"></li>
+<li>Java<br><img src="/../img/8.png" alt="java"><br><img src="/../img/12.png" alt="java"></li>
+<li>gradl环境<br><img src="/../img/9.png" alt="java"><br><img src="/../img/11.png" alt="java"><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">环境配置</span><br><span class="line">ANDROID_HOME</span><br><span class="line">D:<span class="string">\Android\Sdk</span></span><br><span class="line">%ANDROID_HOME%<span class="string">\tools</span></span><br><span class="line">%ANDROID_HOME%<span class="string">\platform-tools</span></span><br><span class="line"><span class="number">2.</span>Java解压到C:<span class="string">\Program</span> Files<span class="string">\</span></span><br><span class="line">GRADLE_HOME</span><br><span class="line">C:<span class="string">\Program</span> Files<span class="string">\Java\gradle-6.8</span></span><br><span class="line">JAVA_HOME</span><br><span class="line">C:<span class="string">\Program</span> Files<span class="string">\Java\JDK1.8u74_x64</span></span><br><span class="line">%GRADLE_HOME%<span class="string">\bin</span></span><br><span class="line">%JAVA_HOME%<span class="string">\bin</span></span><br><span class="line">%JAVA_HOME%<span class="string">\jre\bin</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li>检查安装环境是否配置成功<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">cordova requirements</span></span><br></pre></td></tr></table></figure>
+<img src="/../img/13.png" alt="配置成功"></li>
+</ol>
+<h1 id="cordova项目-用于打包apk"><a href="#cordova项目-用于打包apk" class="headerlink" title="cordova项目(用于打包apk)"></a>cordova项目(用于打包apk)</h1><ol>
+<li>创建cordova项目命令<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// npm install -g cordova@10.0.0  先安装cordova</span><br><span class="line">cordova create ToastDemo com.msh.toast</span><br><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">  ToastDemo： 工程名</span></span><br><span class="line"><span class="comment">  com.msh.toast：包名</span></span><br><span class="line"><span class="comment">  生成的cordova文件中</span></span><br><span class="line"><span class="comment">  *config.xml -包含应用相关信息，使用到的插件以及面向的平台</span></span><br><span class="line"><span class="comment">  platforms – 包含应用运行平台如 Android 和 iOS 上对应的 Cordova 库</span></span><br><span class="line"><span class="comment">  plugins – 包含应用所需插件的 Cordova 库，使得应用能够访问例如照相机和电池状态相关的事项。</span></span><br><span class="line"><span class="comment">  www – 包含应用源代码，例如 HTML, JavaScript 和 CSS 文件</span></span><br><span class="line"><span class="comment">  hooks – 包含为个性化应用编译系统所需的脚本*</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line">cordova platform add android  // 来生成Android平台的cordova库</span><br><span class="line">cordova run android  // 打包项目成apk</span><br></pre></td></tr></table></figure></li>
+<li>vue使用cordova插件时需要在vue中的public下index.html中引入依赖<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 非cordova打包时，需将下一行代码删掉, 使用cordova打包时，需将下一行代码取消注释 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./cordova.js&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="vue项目"><a href="#vue项目" class="headerlink" title="vue项目"></a>vue项目</h1><ol>
+<li>px自动转换rem</li>
+</ol>
+<ul>
+<li>安装两个插件(安装在devDependencies)<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install postcss-pxtorem -<span class="built_in">save</span>-<span class="built_in">dev</span> </span><br><span class="line">npm install amfe-flexible -<span class="built_in">save</span>-<span class="built_in">dev</span></span><br></pre></td></tr></table></figure></li>
+<li>新建文件 postcss.config.js添加如下代码(项目根文件下)<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer = <span class="built_in">require</span>(<span class="string">&#x27;autoprefixer&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> pxtorem = <span class="built_in">require</span>(<span class="string">&#x27;postcss-pxtorem&#x27;</span>)</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(),</span><br><span class="line">    <span class="title function_">pxtorem</span>(&#123;</span><br><span class="line">      <span class="attr">rootValue</span>: <span class="number">37.5</span>, <span class="comment">// 37.5为app, iapd为13.5</span></span><br><span class="line">      <span class="attr">unitPrecision</span>: <span class="number">10</span>, <span class="comment">// 最小精度，小数点位数</span></span><br><span class="line">      <span class="attr">propList</span>: [<span class="string">&#x27;*&#x27;</span>], <span class="comment">// 匹配属性  *代表所有</span></span><br><span class="line">      <span class="attr">minPixelValue</span>: <span class="number">1</span>, <span class="comment">// 计算的最小像素值1px</span></span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="2">
+<li><p>自动切换配置</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// APP打包配置，不配会出现白屏</span></span><br><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV == <span class="string">&quot;production&quot;</span>) &#123;</span><br><span class="line">  document.addEventListener(</span><br><span class="line">    <span class="string">&quot;deviceready&quot;</span>,</span><br><span class="line">    <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      window.Vue = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">        router,</span><br><span class="line">        <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">      &#125;).<span class="symbol">$mou</span>nt(<span class="string">&quot;#app&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="literal">false</span></span><br><span class="line">  );</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    router,</span><br><span class="line">    <span class="attr">render</span>: <span class="function">(<span class="params">h</span>) =&gt;</span> h(App),</span><br><span class="line">  &#125;).<span class="symbol">$mou</span>nt(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>cordova与vue结合需要在main.js如下代码</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV == <span class="string">&quot;production&quot;</span>) &#123;</span><br><span class="line">  <span class="comment">// 判断手机类型</span></span><br><span class="line">  <span class="keyword">if</span> (navigator.userAgent.match(<span class="regexp">/(pad|pod|iPod|ios|iPad|Android|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i</span>)) &#123;</span><br><span class="line">    <span class="comment">// 使用cordova打包时要使用以下方式↓</span></span><br><span class="line">    document.addEventListener(</span><br><span class="line">      <span class="string">&quot;deviceready&quot;</span>,</span><br><span class="line">      <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        window.Vue = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">          router,</span><br><span class="line">          <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">        &#125;).<span class="symbol">$mou</span>nt(<span class="string">&quot;#app&quot;</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="literal">false</span></span><br><span class="line">    );</span><br><span class="line">    <span class="comment">// ↑</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 为部署webApp时使用</span></span><br><span class="line">    <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">      router,</span><br><span class="line">      <span class="attr">render</span>: <span class="function">(<span class="params">h</span>) =&gt;</span> h(App),</span><br><span class="line">    &#125;).<span class="symbol">$mou</span>nt(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// 开发环境</span></span><br><span class="line">  <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    router,</span><br><span class="line">    <span class="attr">render</span>: <span class="function">(<span class="params">h</span>) =&gt;</span> h(App),</span><br><span class="line">  &#125;).<span class="symbol">$mou</span>nt(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="扫码功能"><a href="#扫码功能" class="headerlink" title="扫码功能"></a>扫码功能</h1><ol>
+<li>在 cordova项目安装扫码插件(命令如下)<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin <span class="built_in">add</span> phonegap-plugin-barcodescanner</span><br></pre></td></tr></table></figure></li>
+<li>方法调用<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue中的事件</span></span><br><span class="line">scanCodesEvent() &#123;</span><br><span class="line">  cordova.plugins.barcodeScanner.scan(</span><br><span class="line">    <span class="keyword">function</span> (<span class="params">result</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!result.cancelled) &#123;</span><br><span class="line">        <span class="keyword">if</span> (result.format == <span class="string">&quot;QR_CODE&quot;</span>) &#123;</span><br><span class="line">          <span class="comment">// 扫码后的值</span></span><br><span class="line">          <span class="built_in">console</span>.<span class="built_in">log</span>(result.<span class="built_in">text</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&#x27;Sorry, only qr codes this time&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.<span class="built_in">log</span>(<span class="string">&#x27;The user has dismissed the scan&#x27;</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">function</span> (<span class="params">error</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.<span class="built_in">log</span>(error)</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="app自动更新"><a href="#app自动更新" class="headerlink" title="app自动更新"></a>app自动更新</h1><ol>
+<li>在cordova更目录下载插件命令如下<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova <span class="keyword">plugin</span> add cordova-<span class="keyword">plugin</span>-<span class="keyword">app</span>-<span class="keyword">update</span> --<span class="keyword">save</span></span><br></pre></td></tr></table></figure></li>
+<li>在Vue项目文件夹public中的index.html添加如下代码<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script <span class="attribute">src</span>=<span class="string">&quot;./cordova.js&quot;</span> <span class="attribute">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attribute">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;&lt;/script&gt; </span><br></pre></td></tr></table></figure></li>
+<li>vue中代码<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"> <span class="title function_">created</span>(<span class="params"></span>) &#123;</span><br><span class="line">   <span class="variable language_">this</span>.<span class="title function_">setCheckUpdate</span>(); <span class="comment">// 自动更新</span></span><br><span class="line"> &#125;</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">  <span class="title function_">setCheckUpdate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> == <span class="string">&quot;production&quot;</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">checkUpdate</span>();</span><br><span class="line">      <span class="built_in">clearInterval</span>(<span class="variable language_">this</span>.<span class="property">checkTimer</span>);</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">checkTimer</span> = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">checkUpdate</span>();</span><br><span class="line">      &#125;, <span class="number">180000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 自动更新</span></span><br><span class="line">  <span class="title function_">checkUpdate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// var updateUrl = &quot;http://192.168.28.194:8022&quot;;</span></span><br><span class="line">    <span class="keyword">let</span> updateUrl = <span class="variable language_">window</span>.<span class="property">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&quot;appUpdate&quot;</span>);</span><br><span class="line">    <span class="comment">// alert(updateUrl);</span></span><br><span class="line">    <span class="comment">// alert(updateUrl + &quot;/public/app/version.xml&quot;);</span></span><br><span class="line">    <span class="comment">// alert(updateUrl + &quot;/public/app/app-release.apk&quot;);</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">AppUpdate</span>.<span class="title function_">checkAppUpdate</span>(</span><br><span class="line">      <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">//alert(&quot;success&quot;);</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">//alert(&quot;fail&quot;);</span></span><br><span class="line">      &#125;,</span><br><span class="line">      updateUrl + <span class="string">&quot;/public/app/version.xml&quot;</span>, <span class="comment">// 服务器对比版本文件放在服务器上version.xml</span></span><br><span class="line">      &#123; <span class="attr">downloadUrl</span>: updateUrl + <span class="string">&quot;/public/app/app-release.apk&quot;</span> &#125;  <span class="comment">// 服务器能下载的apk路径地址</span></span><br><span class="line">    );</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="小米推插件"><a href="#小米推插件" class="headerlink" title="小米推插件"></a>小米推插件</h1><ol>
+<li>创建Cordova项目，其中cordova包名要和小米开发平台包名一致</li>
+<li>在cordova中添加插件<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">添加插件cordova plugin <span class="built_in">add</span> cordova-plugin-mipush --variable <span class="attribute">MI_PUSH_APP_KEY</span>=5462004080642 --variable <span class="attribute">MI_PUSH_APP_ID</span>=2882303761520040642 --variable <span class="attribute">MI_PUSH_APP_IOS_ID</span>=your_mipush_appid --variable <span class="attribute">MI_PUSH_APP_IOS_KEY</span>=your_mipush_appkey（MI_PUSH_APP_KEY为你的小米推送的key，MI_PUSH_APP_ID为你的小米推送的ID）</span><br><span class="line">添加插件cordova-plugin-x-toast</span><br></pre></td></tr></table></figure></li>
+<li>在Vue项目文件夹public中的index.html 添加如下代码<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">的时候可能导致页面样式改变，如果改变则不加，否则还是建议加上。这段主要是防止跨站脚本攻击。</span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attr">content</span>=<span class="string">&quot;default-src &#x27;self&#x27; data: gap: https://ssl.gstatic.com &#x27;unsafe-eval&#x27;; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; media-src *; img-src &#x27;self&#x27; data: content:;&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 非cordova打包时，需将下一行代码删掉, 使用cordova打包时，需将下一行代码取消注释 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./cordova.js&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 小米推送消息悬浮窗 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;Toast.js&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> &gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>mian.js中添加<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">document.addEventListener(</span><br><span class="line">  <span class="string">&quot;deviceready&quot;</span>,</span><br><span class="line">  <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    window.Vue = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">      router,</span><br><span class="line">      <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">    &#125;).<span class="symbol">$mou</span>nt(<span class="string">&quot;#app&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="literal">false</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
+<li>vue中使用<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pushServer from <span class="string">&quot;@/plugins/millet/pushServer.js&quot;</span>; <span class="comment">// 小米推送引入</span></span><br><span class="line"><span class="keyword">data</span>() &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">      pushServer: pushServer, <span class="comment">// 小米推送</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;,</span><br><span class="line">created() &#123;</span><br><span class="line">  <span class="keyword">this</span>.milletPush();</span><br><span class="line">&#125;</span><br><span class="line">methods: &#123;</span><br><span class="line"> milletPush() &#123;</span><br><span class="line">   <span class="keyword">this</span>.pushServer.initialize();</span><br><span class="line">   <span class="keyword">this</span>.pushServer.that = <span class="keyword">this</span>;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 最后注册登录人别名注册</span></span><br><span class="line"><span class="keyword">this</span>.pushServer.setAlias(<span class="keyword">this</span>.loginData.username); <span class="comment">//小米推送注册别名</span></span><br></pre></td></tr></table></figure></li>
+<li>pushServer.js文件代码<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = &#123;</span><br><span class="line">  <span class="attr">regId</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">that</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">initialize</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">bindEvents</span>();</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">setAlias</span>(<span class="params">alias</span>) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="variable language_">window</span>.<span class="property">plugins</span>.<span class="property">MiPushPlugin</span>.<span class="title function_">setAlias</span>(alias);</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;设置别名&quot;</span>, alias);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">unSetAlias</span>(<span class="params">alias</span>) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="variable language_">window</span>.<span class="property">plugins</span>.<span class="property">MiPushPlugin</span>.<span class="title function_">unSetAlias</span>(alias);</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;移除别名&quot;</span>, alias);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">bindEvents</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;deviceready&quot;</span>, <span class="variable language_">this</span>.<span class="property">onDeviceReady</span>, <span class="literal">false</span>);</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(</span><br><span class="line">      <span class="string">&quot;mipush.notificationMessageArrived&quot;</span>,</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">onNotificationMessageArrived</span>,</span><br><span class="line">      <span class="literal">false</span></span><br><span class="line">    );</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(</span><br><span class="line">      <span class="string">&quot;mipush.notificationMessageClicked&quot;</span>,</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">onNotificationMessageClicked</span>,</span><br><span class="line">      <span class="literal">false</span></span><br><span class="line">    );</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(</span><br><span class="line">      <span class="string">&quot;mipush.receiveRegisterResult&quot;</span>,</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">onReceiveRegisterResult</span>,</span><br><span class="line">      <span class="literal">false</span></span><br><span class="line">    );</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">onDeviceReady</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;onDeviceReady:---------------&quot;</span>);</span><br><span class="line">    app.<span class="title function_">initiateUI</span>();</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">initiateUI</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;initiateUI&quot;</span>);</span><br><span class="line">      <span class="variable language_">window</span>.<span class="property">plugins</span>.<span class="property">MiPushPlugin</span>.<span class="title function_">init</span>();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (exception) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;initiateUI-----exception:&quot;</span> + exception);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">onNotificationMessageClicked</span>: <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;onNotificationMessageClickedonNotificationMessage&quot;</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> title = data.<span class="property">title</span>;</span><br><span class="line">      <span class="keyword">var</span> description = data.<span class="property">description</span>;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">        <span class="string">&quot;onNotificationMessageClicked---------&quot;</span> +</span><br><span class="line">        <span class="string">&quot;-title-&quot;</span> +</span><br><span class="line">        title +</span><br><span class="line">        <span class="string">&quot;-description-&quot;</span> +</span><br><span class="line">        description</span><br><span class="line">      );</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">        <span class="string">&quot;onNotificationMessageClickeddata&quot;</span> +</span><br><span class="line">        data.<span class="property">extra</span>.<span class="property">path</span> +</span><br><span class="line">        <span class="string">&quot;         &quot;</span> +</span><br><span class="line">        <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data)</span><br><span class="line">      );</span><br><span class="line">      app.<span class="property">that</span>.<span class="property">$router</span>.<span class="title function_">push</span>(data.<span class="property">extra</span>.<span class="property">path</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (exception) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;onNotificationMessageClicked------exception:&quot;</span> + exception);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">showToast</span>(<span class="params">message</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;showToastshowToastshowToastshowToast&quot;</span>, message);</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">plugins</span>.<span class="property">toast</span>.<span class="title function_">showWithOptions</span>(&#123;</span><br><span class="line">        <span class="attr">message</span>: message,</span><br><span class="line">        <span class="attr">duration</span>: <span class="string">&quot;2000&quot;</span>, <span class="comment">// which is 2000 ms. &quot;long&quot; is 4000. Or specify the nr of ms yourself.</span></span><br><span class="line">        <span class="attr">position</span>: <span class="string">&quot;top&quot;</span>,</span><br><span class="line">        <span class="attr">addPixelsY</span>: <span class="number">0</span> <span class="comment">// added a negative value to move it up a bit (default 0)</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="keyword">function</span> (<span class="params">args</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;toast args: &quot;</span>, args.<span class="property">event</span>);</span><br><span class="line">        <span class="comment">//This will print &#x27;hide&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="keyword">function</span> (<span class="params">error</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;toast error: &quot;</span>, error);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">onNotificationMessageArrived</span>: <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> title = data.<span class="property">title</span>;</span><br><span class="line">      <span class="keyword">var</span> description = data.<span class="property">description</span>;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;app.showToast&quot;</span>, data);</span><br><span class="line">      app.<span class="title function_">showToast</span>(title);</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">        <span class="string">&quot;onNotificationMessageArrived---------&quot;</span> +</span><br><span class="line">        <span class="string">&quot;-title-&quot;</span> +</span><br><span class="line">        title +</span><br><span class="line">        <span class="string">&quot;-description-&quot;</span> +</span><br><span class="line">        description</span><br><span class="line">      );</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">        <span class="string">&quot;onNotificationMessageArriveddata---------&quot;</span> + <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data)</span><br><span class="line">      );</span><br><span class="line">    &#125; <span class="keyword">catch</span> (exception) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;onNotificationMessageArrived------exception:&quot;</span> + exception);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">onReceiveRegisterResult</span>: <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;onReceiveRegisterResult---------&quot;</span> + data.<span class="property">regId</span>);</span><br><span class="line">      app.<span class="property">regId</span> = data.<span class="property">regId</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (exception) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;onReceiveRegisterResult------exception:&quot;</span> + exception);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> app;</span><br><span class="line"><span class="comment">// app.initialize();</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="拍照功能"><a href="#拍照功能" class="headerlink" title="拍照功能"></a>拍照功能</h1><ol>
+<li>安装插件<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin <span class="built_in">add</span> cordova-plugin-<span class="built_in">camera</span></span><br></pre></td></tr></table></figure></li>
+<li>vue代码<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@click=<span class="string">&quot;cameraTakePicture&quot;</span></span><br><span class="line"><span class="attr">methods</span>: &#123;</span><br><span class="line">  <span class="title function_">cameraTakePicture</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> self = <span class="variable language_">this</span>;</span><br><span class="line">    navigator.<span class="property">camera</span>.<span class="title function_">getPicture</span>(onSuccess, onFail, &#123;</span><br><span class="line">      <span class="attr">quality</span>: <span class="number">50</span>,</span><br><span class="line">      <span class="attr">destinationType</span>: <span class="title class_">Camera</span>.<span class="property">DestinationType</span>.<span class="property">DATA_URL</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">onSuccess</span>(<span class="params">imageData</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> src = <span class="string">&quot;data:image/jpeg;base64,&quot;</span> + imageData;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(src);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">onFail</span>(<span class="params">message</span>) &#123;</span><br><span class="line">      <span class="title function_">alert</span>(<span class="string">&quot;Failed because: &quot;</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="cordova常用命令"><a href="#cordova常用命令" class="headerlink" title="cordova常用命令"></a>cordova常用命令</h1><ol>
+<li>查看所安装的插件<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova <span class="keyword">plugin</span> <span class="keyword">ls</span></span><br></pre></td></tr></table></figure></li>
+<li>安装插件<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">cordova</span> plugin <span class="keyword">add</span> 名字  <span class="comment">// 安装官网的插件</span></span><br><span class="line"><span class="symbol">cordova</span> plugin <span class="keyword">add</span> ./目录  <span class="comment">// 安装自定义</span></span><br></pre></td></tr></table></figure></li>
+<li>卸载com.evget.qrcodescan插件<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin <span class="built_in">remove</span> com.evget.qrcodescan</span><br></pre></td></tr></table></figure></li>
+<li>cordova自定义插件</li>
+</ol>
+<ul>
+<li>创建插件<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plugman create --<span class="keyword">name</span> toast_plugin --plugin_id cordova-plugin-toastdemo --plugin_version <span class="number">1.0</span>.<span class="number">0</span></span><br><span class="line">–<span class="function"><span class="title">name</span> toast_plugin --&gt;</span> 插件名 (注意起名，不要和原生方法冲突)</span><br><span class="line">–<span class="function"><span class="title">plugin_id</span> cordova-plugin-toastdemo --&gt;</span> 插件Id</span><br><span class="line">–<span class="function"><span class="title">plugin_version</span> 1.0.0 --&gt;</span> 插件版本号</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="cordova小细节"><a href="#cordova小细节" class="headerlink" title="cordova小细节"></a>cordova小细节</h1><ol>
+<li><p>在platforms/android/app/src/main/AndroidManifest.xml中标签application需要添加android:usesCleartextTraffic=”true”<br>因为最新cordova加了加密https协议，不然访问不了请求</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;application android:<span class="attribute">usesCleartextTraffic</span>=<span class="string">&quot;true&quot;</span>&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>基本配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;utf-8&#x27;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">widget</span> <span class="attr">id</span>=<span class="string">&quot;org.apache.cordova.myApp&quot;</span> <span class="attr">version</span>=<span class="string">&quot;1.0.0&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns</span>=<span class="string">&quot;http://www.w3.org/ns/widgets&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:cdv</span>=<span class="string">&quot;http://cordova.apache.org/ns/1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>渝辉MES-生产执行<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">        A sample Apache Cordova application that responds to the deviceready event.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">author</span> <span class="attr">email</span>=<span class="string">&quot;dev@cordova.apache.org&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://cordova.io&quot;</span>&gt;</span></span><br><span class="line">        Apache Cordova Team</span><br><span class="line">    <span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">content</span> <span class="attr">src</span>=<span class="string">&quot;index.html&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">access</span> <span class="attr">origin</span>=<span class="string">&quot;*&quot;</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 浏览器连接可打开配置 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">allow-navigation</span> <span class="attr">href</span>=<span class="string">&quot;http://*/*&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">allow-navigation</span> <span class="attr">href</span>=<span class="string">&quot;https://*/*&quot;</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 系统内部连接可打开配置 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">&quot;http://*/*&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">&quot;https://*/*&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">&quot;tel:*&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">&quot;sms:*&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">&quot;mailto:*&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">&quot;geo:*&quot;</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 禁止手机app横竖屏幕转换 default 默认转屏, landscape横向, portrait 纵向  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">preference</span> <span class="attr">name</span>=<span class="string">&quot;orientation&quot;</span> <span class="attr">value</span>=<span class="string">&quot;landscape&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">&quot;android&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">&quot;market:*&quot;</span> /&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 移动app图标设置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">icon</span> <span class="attr">density</span>=<span class="string">&quot;ldpi&quot;</span> <span class="attr">src</span>=<span class="string">&quot;icon/android/logo.png&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">icon</span> <span class="attr">density</span>=<span class="string">&quot;mdpi&quot;</span> <span class="attr">src</span>=<span class="string">&quot;icon/android/logo.png&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">icon</span> <span class="attr">density</span>=<span class="string">&quot;hdpi&quot;</span> <span class="attr">src</span>=<span class="string">&quot;icon/android/logo.png&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">icon</span> <span class="attr">density</span>=<span class="string">&quot;xhdpi&quot;</span> <span class="attr">src</span>=<span class="string">&quot;icon/android/logo.png&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">icon</span> <span class="attr">density</span>=<span class="string">&quot;xxhdpi&quot;</span> <span class="attr">src</span>=<span class="string">&quot;icon/android/logo.png&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">icon</span> <span class="attr">density</span>=<span class="string">&quot;xxxhdpi&quot;</span> <span class="attr">src</span>=<span class="string">&quot;icon/android/logo.png&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">platform</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">&quot;ios&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">&quot;itms:*&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">allow-intent</span> <span class="attr">href</span>=<span class="string">&quot;itms-apps:*&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">platform</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">widget</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>请我喝杯咖啡</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/img/weix.png" alt="Zhang Jie 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/img/zhifubaio.jpg" alt="Zhang Jie 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Zhang Jie
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2020/12/01/%E7%A7%BB%E5%8A%A8%E7%AB%AFvue%EF%BC%8Bcordova%E9%A1%B9%E7%9B%AE/" title="移动端vue＋cordova项目">http://example.com/2020/12/01/移动端vue＋cordova项目/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/25/npm/" rel="prev" title="npm常用命令">
+      <i class="fa fa-chevron-left"></i> npm常用命令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/25/markdown/" rel="next" title="markdown语法学习">
+      markdown语法学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cordova%E6%89%93%E5%8C%85%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">cordova打包环境配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cordova%E9%A1%B9%E7%9B%AE-%E7%94%A8%E4%BA%8E%E6%89%93%E5%8C%85apk"><span class="nav-number">2.</span> <span class="nav-text">cordova项目(用于打包apk)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text">vue项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%AB%E7%A0%81%E5%8A%9F%E8%83%BD"><span class="nav-number">4.</span> <span class="nav-text">扫码功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#app%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0"><span class="nav-number">5.</span> <span class="nav-text">app自动更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%B1%B3%E6%8E%A8%E6%8F%92%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">小米推插件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%8D%E7%85%A7%E5%8A%9F%E8%83%BD"><span class="nav-number">7.</span> <span class="nav-text">拍照功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cordova%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">8.</span> <span class="nav-text">cordova常用命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cordova%E5%B0%8F%E7%BB%86%E8%8A%82"><span class="nav-number">9.</span> <span class="nav-text">cordova小细节</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhang Jie"
+      src="/img/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Zhang Jie</p>
+  <div class="site-description" itemprop="description">直到这一刻微笑着说话为止，我至少留下了一公升眼泪</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zj261788" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zj261788" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zj2811932734@qq.com@gmail.com" title="E-Mail → mailto:zj2811932734@qq.com@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5544262132/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;5544262132&#x2F;profile?rightmod&#x3D;1&amp;wvr&#x3D;6&amp;mod&#x3D;personinfo&amp;is_all&#x3D;1" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://myaccount.google.com/?utm_source=OGB&utm_medium=act" title="Google → https:&#x2F;&#x2F;myaccount.google.com&#x2F;?utm_source&#x3D;OGB&amp;utm_medium&#x3D;act" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhang Jie</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">143k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:10</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.3' zIndex='-1' count='50' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
