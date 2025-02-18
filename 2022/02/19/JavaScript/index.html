@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>JavaScript高级语法 - Jie Growth Diary</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Jie Growth Diary"><meta name="msapplication-TileImage" content="/img/avatar.jpg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Jie Growth Diary"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="浏览器引擎常见内核 Gekcko Trident Webkit Blink  js常见引擎 spiderMonkey  chakra  javaScriptCore  V8"><meta property="og:type" content="blog"><meta property="og:title" content="JavaScript高级语法"><meta property="og:url" content="https://zj261788.github.io/2022/02/19/JavaScript/"><meta property="og:site_name" content="Jie Growth Diary"><meta property="og:description" content="浏览器引擎常见内核 Gekcko Trident Webkit Blink  js常见引擎 spiderMonkey  chakra  javaScriptCore  V8"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://zj261788.github.io/img/1.png"><meta property="og:image" content="https://zj261788.github.io/img/2.png"><meta property="og:image" content="https://zj261788.github.io/img/3.jpg"><meta property="article:published_time" content="2022-02-18T16:00:00.000Z"><meta property="article:modified_time" content="2024-10-23T07:06:49.700Z"><meta property="article:author" content="Zhang Jie"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://zj261788.github.io/img/1.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://zj261788.github.io/2022/02/19/JavaScript/"},"headline":"JavaScript高级语法","image":["https://zj261788.github.io/img/1.png","https://zj261788.github.io/img/2.png","https://zj261788.github.io/img/3.jpg"],"datePublished":"2022-02-18T16:00:00.000Z","dateModified":"2024-10-23T07:06:49.700Z","author":{"@type":"Person","name":"Zhang Jie"},"publisher":{"@type":"Organization","name":"Jie Growth Diary","logo":{"@type":"ImageObject","url":"https://zj261788.github.io/img/avatar.jpg"}},"description":"浏览器引擎常见内核 Gekcko Trident Webkit Blink  js常见引擎 spiderMonkey  chakra  javaScriptCore  V8"}</script><link rel="canonical" href="https://zj261788.github.io/2022/02/19/JavaScript/"><link rel="icon" href="/img/avatar.jpg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link data-pjax rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/11.7.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><script src="/js/runtime.js"></script><script data-pjax src="/js/prism/prism.js" defer></script><link rel="stylesheet" href="/js/prism/prism.css"><link href="/js/copy/prism-toolbar.min.css" rel="stylesheet"><script src="/js/copy/prism-core.min.js"></script><script src="/js/copy/prism-toolbar.min.js"></script><script src="/js/copy/prism-copy-to-clipboard.min.js"></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-layout-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/avatar.jpg" alt="Jie Growth Diary" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/zj261788/zj261788.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item copyright article-title type-2">原创</span><span class="level-item"><time dateTime="2022-02-18T16:00:00.000Z" title="2022/2/19 00:00:00">2022-02-19</time>发表</span><span class="level-item"><time dateTime="2024-10-23T07:06:49.700Z" title="2024/10/23 15:06:49">2024-10-23</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/js/">js</a></span><span class="level-item">3 分钟读完 (大约464个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">JavaScript高级语法</h1><div class="copyright article-block type-2"><p>版权申明：本文为原创文章，转载请注明原文出处</p><p>原文链接：<a href="https://zj261788.github.io/2022/02/19/JavaScript/" target="_blank">https://zj261788.github.io/2022/02/19/JavaScript/</a></p></div><div class="content"><h1 id="浏览器引擎常见内核"><a href="#浏览器引擎常见内核" class="headerlink" title="浏览器引擎常见内核"></a>浏览器引擎常见内核</h1><ol>
+<li>Gekcko</li>
+<li>Trident</li>
+<li>Webkit</li>
+<li>Blink</li>
+</ol>
+<h1 id="js常见引擎"><a href="#js常见引擎" class="headerlink" title="js常见引擎"></a>js常见引擎</h1><ol>
+<li><p>spiderMonkey</p>
+</li>
+<li><p>chakra</p>
+</li>
+<li><p>javaScriptCore</p>
+</li>
+<li><p>V8</p>
+<span id="more"></span>
+<h1 id="浏览器内核与js引擎的关系（以Webkit为例）"><a href="#浏览器内核与js引擎的关系（以Webkit为例）" class="headerlink" title="浏览器内核与js引擎的关系（以Webkit为例）"></a>浏览器内核与js引擎的关系（以Webkit为例）</h1></li>
+<li><p>ebkit是由webcore和javaScriptCore组成</p>
+</li>
+</ol>
+<h1 id="v8引擎的原理"><a href="#v8引擎的原理" class="headerlink" title="v8引擎的原理"></a>v8引擎的原理</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><ol>
+<li>v8是c++编写的google高性能javaScript和WebAssembly引擎，它用于Chrome和node.js等使用</li>
+<li>v8可以独立运行，也可以嵌入到任何c++应用程序中</li>
+</ol>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p><img src="/../img/1.png" alt="流程"><br><img src="/../img/2.png" alt="介绍"></p>
+<h1 id="内存管理与内存泄露"><a href="#内存管理与内存泄露" class="headerlink" title="内存管理与内存泄露"></a>内存管理与内存泄露</h1><ol>
+<li>作用域，作用域提升，执行上下文</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span>
+    <span class="token keyword">var</span> m <span class="token operator">=</span> <span class="token number">10</span>
+    <span class="token keyword">var</span> n <span class="token operator">=</span> <span class="token number">20</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span>
+    <span class="token keyword">function</span> <span class="token function">brr</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">brr</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">var</span> age <span class="token operator">=</span> <span class="token number">12</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> message <span class="token operator">=</span> <span class="token string">'holle'</span>
+<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">function</span> <span class="token function">demo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> message <span class="token operator">=</span> <span class="token string">'zj'</span>
+    <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">demo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="闭包定义"><a href="#闭包定义" class="headerlink" title="闭包定义"></a>闭包定义</h2><p>闭包由两部分组成:一个函数并且可以访问自由变量<br>一个函数如果它可以访问外层作用域的自由变量，那么这个函数是一个闭包<br>广义角度来说js创建的所有的函数都是闭包，从狭义来说，js中一个函数有访问外层作用域的自由变量才是闭包</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> name <span class="token operator">=</span> <span class="token string">'zj'</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'bar'</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">var</span> fn <span class="token operator">=</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">// bar函数与name自由变量组成闭包</span>
+<span class="token comment">// 解决内存泄露</span>
+fn<span class="token operator">=</span><span class="token keyword">null</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="闭包缺点"><a href="#闭包缺点" class="headerlink" title="闭包缺点"></a>闭包缺点</h2><ol>
+<li>会导致内存泄露</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> name <span class="token operator">=</span> <span class="token string">'foo'</span>
+    <span class="token keyword">var</span> age <span class="token operator">=</span> <span class="token number">18</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">var</span> fn <span class="token operator">=</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span>      <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>如何形成闭包内存泄露<br><img src="/../img/3.jpg" alt="如何形成闭包内存泄露"></li>
+</ol>
+<h1 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h1><ol>
+<li>一个函数如果接受另一个函数作为参数称为高阶函数</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">count</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+   <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    consle<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'bar'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">foo</span><span class="token punctuation">(</span>bar<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>一个函数会返回另一个函数作为返回值的函数称为高阶函数</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">makeAdder</span><span class="token punctuation">(</span><span class="token parameter">ar</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token parameter">num</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> ar <span class="token operator">+</span> num
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">var</span> add5<span class="token operator">=</span><span class="token function">makeAdder</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">add5</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">add5</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</div><div class="article-licensing box"><div class="licensing-title"><p>JavaScript高级语法</p><p><a href="https://zj261788.github.io/2022/02/19/JavaScript/">https://zj261788.github.io/2022/02/19/JavaScript/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Zhang Jie</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-02-19</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-10-23</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/zhifubaio.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/weix.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/02/28/nvm/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">nvm包管理器常用命令</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2021/12/08/utils/"><span class="level-item">vue-Utils通用方法</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "ab1e316c094e0b87001102e741ff9676",
+            repo: "zj261788.github.io",
+            owner: "zj261788",
+            clientID: "Ov23ct9JCRJDGQUYlI1J",
+            clientSecret: "cdf5c517455379efbc0b9ccde0525b21938bc03e",
+            admin: ["zj261788"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 3,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.jpg" alt="ZJ261788"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">ZJ261788</p><p class="is-size-6 is-block">普普通通的IT打工族</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">23</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">3</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/zj261788" target="_blank" rel="me noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/zj261788"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#浏览器引擎常见内核"><span class="level-left"><span class="level-item">1</span><span class="level-item">浏览器引擎常见内核</span></span></a></li><li><a class="level is-mobile" href="#js常见引擎"><span class="level-left"><span class="level-item">2</span><span class="level-item">js常见引擎</span></span></a></li><li><a class="level is-mobile" href="#浏览器内核与js引擎的关系（以Webkit为例）"><span class="level-left"><span class="level-item">3</span><span class="level-item">浏览器内核与js引擎的关系（以Webkit为例）</span></span></a></li><li><a class="level is-mobile" href="#v8引擎的原理"><span class="level-left"><span class="level-item">4</span><span class="level-item">v8引擎的原理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#介绍"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">介绍</span></span></a></li><li><a class="level is-mobile" href="#流程"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">流程</span></span></a></li></ul></li><li><a class="level is-mobile" href="#内存管理与内存泄露"><span class="level-left"><span class="level-item">5</span><span class="level-item">内存管理与内存泄露</span></span></a></li><li><a class="level is-mobile" href="#闭包"><span class="level-left"><span class="level-item">6</span><span class="level-item">闭包</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#闭包定义"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">闭包定义</span></span></a></li><li><a class="level is-mobile" href="#闭包缺点"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">闭包缺点</span></span></a></li></ul></li><li><a class="level is-mobile" href="#高阶函数"><span class="level-left"><span class="level-item">7</span><span class="level-item">高阶函数</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/avatar.jpg" alt="Jie Growth Diary" height="28"></a><p class="is-size-7"><span>&copy; 2025 Zhang Jie</span><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><p class="is-size-7">2811932734@qq.com</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/zj261788/zj261788.github.io"><i class="fab fa-github"></i></a></p></div><div id="site-runtime"></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script data-pjax src="/js/click.js" defer></script><script data-pjax src="/js/snow.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>

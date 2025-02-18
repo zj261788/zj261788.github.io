@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>宝典 - Jie Growth Diary</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Jie Growth Diary"><meta name="msapplication-TileImage" content="/img/avatar.jpg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Jie Growth Diary"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Canvas （画布）Canvas 是 HTML5 中新出的一个元素，开发者可以在上面绘制一系列图形 css的盒子模型描述：常见的内容(content),内边距(padding),外边距(margin),边框(border),css都具备这些属性，而这些属性在我们日常生活中遇见的事物比如盒子作一个比较来理解所以叫它css盒子模型 html5应用程序缓存和浏览器缓存的区别水平垂直居中"><meta property="og:type" content="blog"><meta property="og:title" content="宝典"><meta property="og:url" content="https://zj261788.github.io/2022/07/07/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="Jie Growth Diary"><meta property="og:description" content="Canvas （画布）Canvas 是 HTML5 中新出的一个元素，开发者可以在上面绘制一系列图形 css的盒子模型描述：常见的内容(content),内边距(padding),外边距(margin),边框(border),css都具备这些属性，而这些属性在我们日常生活中遇见的事物比如盒子作一个比较来理解所以叫它css盒子模型 html5应用程序缓存和浏览器缓存的区别水平垂直居中"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://zj261788.github.io/img/og_image.png"><meta property="article:published_time" content="2022-07-06T16:00:00.000Z"><meta property="article:modified_time" content="2024-10-23T07:06:49.705Z"><meta property="article:author" content="Zhang Jie"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://zj261788.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://zj261788.github.io/2022/07/07/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/"},"headline":"宝典","image":["https://zj261788.github.io/img/og_image.png"],"datePublished":"2022-07-06T16:00:00.000Z","dateModified":"2024-10-23T07:06:49.705Z","author":{"@type":"Person","name":"Zhang Jie"},"publisher":{"@type":"Organization","name":"Jie Growth Diary","logo":{"@type":"ImageObject","url":"https://zj261788.github.io/img/avatar.jpg"}},"description":"Canvas （画布）Canvas 是 HTML5 中新出的一个元素，开发者可以在上面绘制一系列图形 css的盒子模型描述：常见的内容(content),内边距(padding),外边距(margin),边框(border),css都具备这些属性，而这些属性在我们日常生活中遇见的事物比如盒子作一个比较来理解所以叫它css盒子模型 html5应用程序缓存和浏览器缓存的区别水平垂直居中"}</script><link rel="canonical" href="https://zj261788.github.io/2022/07/07/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/"><link rel="icon" href="/img/avatar.jpg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link data-pjax rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/11.7.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><script src="/js/runtime.js"></script><script data-pjax src="/js/prism/prism.js" defer></script><link rel="stylesheet" href="/js/prism/prism.css"><link href="/js/copy/prism-toolbar.min.css" rel="stylesheet"><script src="/js/copy/prism-core.min.js"></script><script src="/js/copy/prism-toolbar.min.js"></script><script src="/js/copy/prism-copy-to-clipboard.min.js"></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-layout-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/avatar.jpg" alt="Jie Growth Diary" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/zj261788/zj261788.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item copyright article-title type-2">原创</span><span class="level-item"><time dateTime="2022-07-06T16:00:00.000Z" title="2022/7/7 00:00:00">2022-07-07</time>发表</span><span class="level-item"><time dateTime="2024-10-23T07:06:49.705Z" title="2024/10/23 15:06:49">2024-10-23</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%AC%94%E8%AE%B0%E5%AD%A6%E4%B9%A0/">笔记学习</a></span><span class="level-item">10 分钟读完 (大约1534个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">宝典</h1><div class="copyright article-block type-2"><p>版权申明：本文为原创文章，转载请注明原文出处</p><p>原文链接：<a href="https://zj261788.github.io/2022/07/07/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/" target="_blank">https://zj261788.github.io/2022/07/07/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/</a></p></div><div class="content"><h1 id="Canvas-（画布）"><a href="#Canvas-（画布）" class="headerlink" title="Canvas （画布）"></a>Canvas （画布）</h1><p>Canvas 是 HTML5 中新出的一个元素，开发者可以在上面绘制一系列图形</p>
+<h1 id="css的盒子模型"><a href="#css的盒子模型" class="headerlink" title="css的盒子模型"></a>css的盒子模型</h1><p>描述：常见的内容(content),内边距(padding),外边距(margin),边框(border),css都具备这些属性，而这些属性在我们日常生活中遇见的事物比如盒子作一个比较来理解所以叫它css盒子模型</p>
+<h1 id="html5应用程序缓存和浏览器缓存的区别"><a href="#html5应用程序缓存和浏览器缓存的区别" class="headerlink" title="html5应用程序缓存和浏览器缓存的区别"></a>html5应用程序缓存和浏览器缓存的区别</h1><h1 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h1><span id="more"></span>
+<ol>
+<li>利用定位＋margin</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">&lt;!-- 父级div --&gt;
+position:relative;
+height:200px;
+width:200px;
+&lt;!-- 子级div --&gt;
+position:absolute;
+top:0;
+bottom:0;
+left:0;
+right:0;
+margin:auto;
+width:100px;
+height:100px;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>定位＋transform</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">&lt;!-- 父级div --&gt;
+position:relative;
+width:200px;
+heigth:200px;
+&lt;!-- 子级div --&gt;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,50%);
+width:100px;
+heigth:100px;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="3">
+<li>使用flex</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">&lt;!-- 父级div --&gt;
+display:flex;
+justify-content:center;
+align-items:center;
+width:200px;
+height:200px;
+&lt;!-- 子级div --&gt;
+width:100px;
+height:100px&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="4">
+<li>利用grid</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">&lt;!-- 父级div --&gt;
+display: grid;
+justify-content: center;
+align-items: center;
+width: 200px;
+height: 200px;
+&lt;!-- 子级div --&gt;
+width: 100px;
+height: 100px;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="ajax的工作原理"><a href="#ajax的工作原理" class="headerlink" title="ajax的工作原理"></a>ajax的工作原理</h1><p>是通过XmlHttpRequest的对象来向服务器发起异步请求，从服务器中获得数据，然后用Javascript来操作DOM从而更新局部页面</p>
+<h1 id="浏览器内多标签页怎么通讯"><a href="#浏览器内多标签页怎么通讯" class="headerlink" title="浏览器内多标签页怎么通讯"></a>浏览器内多标签页怎么通讯</h1><ol>
+<li>使用websocket协议,可以实现服务器推送，所以服务器就可以用来当做这个中介者。标签页通过向服务器发送数据，然后由服务器向其他标签页推送转发。</li>
+<li>使用ShareWorker的方式，shareworker会在页面存在的生命周期内创建一个唯一的线程，并且开启多个页面也只会使用同一个线程。这个时候共享线程就是充当中介者的角色。标签页间通过共享一个线程，然后通过这个共享的线程来实现数据的交换。</li>
+<li>使用localStorage，我们可以在一个标签页对locaStorage的变化事件进行监听，然后当另一个标签页修改数据的时候，我们就可以通过这个监听事件来获取到数据。</li>
+<li>使用postMessage方法，如果我们能获得对应标签的引用，就可以使用postMessage方法进行通讯。</li>
+</ol>
+<h1 id="不使用border画出1px的线"><a href="#不使用border画出1px的线" class="headerlink" title="不使用border画出1px的线"></a>不使用border画出1px的线</h1><ol>
+<li>div</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">&lt;div style&#x3D;&quot;height:1px;overflow:hidden;background:red&quot;&gt;&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="2">
+<li>hr</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">&lt;hr size&#x3D;&quot;1&quot;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="css3有哪些新特性"><a href="#css3有哪些新特性" class="headerlink" title="css3有哪些新特性"></a>css3有哪些新特性</h1><h1 id="use-strict-是什么，使用它区别"><a href="#use-strict-是什么，使用它区别" class="headerlink" title="use strict 是什么，使用它区别"></a>use strict 是什么，使用它区别</h1><ol>
+<li><p>变量必须声明后再使用</p>
+</li>
+<li><p>在使用默认参数的函数中的参数不能有同名属性，否则报错，在同一作用域中不能有同名参数</p>
+</li>
+<li><p>增加了保留字（比如protected、static和interface）</p>
+</li>
+<li><p>禁止this指向全局对象</p>
+</li>
+<li><p>不能对只读属性赋值，否则报错</p>
+</li>
+<li><p>不能使用前缀0表示八进制数，否则报错（用0O表示）</p>
+</li>
+<li><p>不能删除不可删除的属性，否则报错</p>
+</li>
+<li><p>不能使用with语句(with语句接收的对象会添加到作用域链的前端并在代码执行完之后移除)（ with(obj) ）</p>
+</li>
+<li><p>eval不会在它的外层作用域引入变量 ( eval(str) )</p>
+</li>
+<li><p>eval和arguments不能被重新赋值</p>
+</li>
+<li><p>arguments不会自动反映函数参数的变化</p>
+</li>
+<li><p>不能使用arguments.callee</p>
+</li>
+<li><p>不能使用arguments.caller</p>
+</li>
+<li><p>不能使用fn.caller和fn.arguments获取函数调用的堆栈</p>
+</li>
+<li><p>不能删除变量delete prop，会报错，只能删除属性delete global[prop]</p>
+</li>
+</ol>
+<h1 id="htm5有哪些新特新除了哪些元素"><a href="#htm5有哪些新特新除了哪些元素" class="headerlink" title="htm5有哪些新特新除了哪些元素"></a>htm5有哪些新特新除了哪些元素</h1><pre class="line-numbers language-none"><code class="language-none">新特性：
+     a. HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加
+     b. 拖拽释放(Drag and drop) API
+     c. 语义化更好的内容标签（header,nav,footer,aside,article,section）
+     d. 音频、视频API(audio,video)
+     e. 画布(Canvas) API
+     f. 地理(Geolocation) API
+     g. 本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失
+     h. sessionStorage 的数据在页面会话结束时会被清除
+     i. 表单控件，calendar、date、time、email、url、search
+     j. 新的技术webworker, websocket等
+移除的元素：
+     k. 纯表现的元素：basefont，big，center, s，strike，tt，u
+     l. 对可用性产生负面影响的元素：frame，frameset，noframes<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="如何处理html5新标签在浏览器兼容性问题"><a href="#如何处理html5新标签在浏览器兼容性问题" class="headerlink" title="如何处理html5新标签在浏览器兼容性问题"></a>如何处理html5新标签在浏览器兼容性问题</h1><h1 id="如何处理区分html和html5"><a href="#如何处理区分html和html5" class="headerlink" title="如何处理区分html和html5"></a>如何处理区分html和html5</h1><h1 id="vue双向绑定的原理"><a href="#vue双向绑定的原理" class="headerlink" title="vue双向绑定的原理"></a>vue双向绑定的原理</h1><h1 id="来谈一谈你对vue项目做了哪些优化"><a href="#来谈一谈你对vue项目做了哪些优化" class="headerlink" title="来谈一谈你对vue项目做了哪些优化"></a>来谈一谈你对vue项目做了哪些优化</h1><h1 id="生拷贝和浅拷贝的区别"><a href="#生拷贝和浅拷贝的区别" class="headerlink" title="生拷贝和浅拷贝的区别"></a>生拷贝和浅拷贝的区别</h1><h1 id="Cookie、sessionStorage、localStorage的区别"><a href="#Cookie、sessionStorage、localStorage的区别" class="headerlink" title="Cookie、sessionStorage、localStorage的区别"></a>Cookie、sessionStorage、localStorage的区别</h1><h1 id="data中可以返回对象吗"><a href="#data中可以返回对象吗" class="headerlink" title="data中可以返回对象吗"></a>data中可以返回对象吗</h1><h1 id="绘制和重排有了解吗"><a href="#绘制和重排有了解吗" class="headerlink" title="绘制和重排有了解吗"></a>绘制和重排有了解吗</h1><h1 id="数组有哪些方法"><a href="#数组有哪些方法" class="headerlink" title="数组有哪些方法"></a>数组有哪些方法</h1><h1 id="es6中let，const-var的区别"><a href="#es6中let，const-var的区别" class="headerlink" title="es6中let，const,var的区别"></a>es6中let，const,var的区别</h1><h1 id="es6箭头函数和普通函数的区别"><a href="#es6箭头函数和普通函数的区别" class="headerlink" title="es6箭头函数和普通函数的区别"></a>es6箭头函数和普通函数的区别</h1><h1 id="vue2和vue3的区别"><a href="#vue2和vue3的区别" class="headerlink" title="vue2和vue3的区别"></a>vue2和vue3的区别</h1><h1 id="数组排序有哪些方法"><a href="#数组排序有哪些方法" class="headerlink" title="数组排序有哪些方法"></a>数组排序有哪些方法</h1><h1 id="如下那种前端构建技术可以剔除javascripc中没有被使用的代码"><a href="#如下那种前端构建技术可以剔除javascripc中没有被使用的代码" class="headerlink" title="如下那种前端构建技术可以剔除javascripc中没有被使用的代码"></a>如下那种前端构建技术可以剔除javascripc中没有被使用的代码</h1><p>code Splitting可以将代码分成多个捆绑包，然后可以按需或并行加载；source Mapping是从已转换的代码映射到原始源的文件，使浏览器能够重构原始源并在调试器中重建的原始源</p>
+<h1 id="怎么解决回调地狱"><a href="#怎么解决回调地狱" class="headerlink" title="怎么解决回调地狱"></a>怎么解决回调地狱</h1><p>使用async await可以解决</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">timer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span>reject</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">async</span> <span class="token function">inittime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">timer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="js中数组里面的相同的元素如何去重"><a href="#js中数组里面的相同的元素如何去重" class="headerlink" title="js中数组里面的相同的元素如何去重"></a>js中数组里面的相同的元素如何去重</h1><ol>
+<li>这个数组里面的数据类型一致吗</li>
+<li>对象一致判定的原则是什么，数组一致判定的标准是什么</li>
+</ol>
+<h1 id="vuex中的数据在页面刷新以后消失怎么办"><a href="#vuex中的数据在页面刷新以后消失怎么办" class="headerlink" title="vuex中的数据在页面刷新以后消失怎么办"></a>vuex中的数据在页面刷新以后消失怎么办</h1><p>自己手动保存在localStorage或sessionStorage或者直接使用社区的vuew-persist或者vuex-persistedstate</p>
+<h1 id="vue中keep-alive的作用"><a href="#vue中keep-alive的作用" class="headerlink" title="vue中keep-alive的作用"></a>vue中keep-alive的作用</h1><p>keep-alive用来缓存组件，避免多次加载相应的组件减少性能消耗<br>简单来说使用了keep-alive的页面，第二次进入的时候只会渲染第一次渲染好的页面数据，除非刷新页面才渲染新数据才执行created等钩子函数否则只能用activated和deactived这两个生命钩子来得知当前组件是否处于活动状态</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>宝典</p><p><a href="https://zj261788.github.io/2022/07/07/面试笔记/">https://zj261788.github.io/2022/07/07/面试笔记/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Zhang Jie</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-07-07</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-10-23</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/zhifubaio.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/weix.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/07/14/vueConfigJs/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">vue</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/07/04/%E5%B7%A5%E5%85%B7%E6%B7%B7%E5%85%A5/"><span class="level-item">工具混入</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "58eb74e198afea6ff111967f3a192390",
+            repo: "zj261788.github.io",
+            owner: "zj261788",
+            clientID: "Ov23ct9JCRJDGQUYlI1J",
+            clientSecret: "cdf5c517455379efbc0b9ccde0525b21938bc03e",
+            admin: ["zj261788"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 3,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.jpg" alt="ZJ261788"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">ZJ261788</p><p class="is-size-6 is-block">普普通通的IT打工族</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">23</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">3</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/zj261788" target="_blank" rel="me noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/zj261788"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Canvas-（画布）"><span class="level-left"><span class="level-item">1</span><span class="level-item">Canvas （画布）</span></span></a></li><li><a class="level is-mobile" href="#css的盒子模型"><span class="level-left"><span class="level-item">2</span><span class="level-item">css的盒子模型</span></span></a></li><li><a class="level is-mobile" href="#html5应用程序缓存和浏览器缓存的区别"><span class="level-left"><span class="level-item">3</span><span class="level-item">html5应用程序缓存和浏览器缓存的区别</span></span></a></li><li><a class="level is-mobile" href="#水平垂直居中"><span class="level-left"><span class="level-item">4</span><span class="level-item">水平垂直居中</span></span></a></li><li><a class="level is-mobile" href="#ajax的工作原理"><span class="level-left"><span class="level-item">5</span><span class="level-item">ajax的工作原理</span></span></a></li><li><a class="level is-mobile" href="#浏览器内多标签页怎么通讯"><span class="level-left"><span class="level-item">6</span><span class="level-item">浏览器内多标签页怎么通讯</span></span></a></li><li><a class="level is-mobile" href="#不使用border画出1px的线"><span class="level-left"><span class="level-item">7</span><span class="level-item">不使用border画出1px的线</span></span></a></li><li><a class="level is-mobile" href="#css3有哪些新特性"><span class="level-left"><span class="level-item">8</span><span class="level-item">css3有哪些新特性</span></span></a></li><li><a class="level is-mobile" href="#use-strict-是什么，使用它区别"><span class="level-left"><span class="level-item">9</span><span class="level-item">use strict 是什么，使用它区别</span></span></a></li><li><a class="level is-mobile" href="#htm5有哪些新特新除了哪些元素"><span class="level-left"><span class="level-item">10</span><span class="level-item">htm5有哪些新特新除了哪些元素</span></span></a></li><li><a class="level is-mobile" href="#如何处理html5新标签在浏览器兼容性问题"><span class="level-left"><span class="level-item">11</span><span class="level-item">如何处理html5新标签在浏览器兼容性问题</span></span></a></li><li><a class="level is-mobile" href="#如何处理区分html和html5"><span class="level-left"><span class="level-item">12</span><span class="level-item">如何处理区分html和html5</span></span></a></li><li><a class="level is-mobile" href="#vue双向绑定的原理"><span class="level-left"><span class="level-item">13</span><span class="level-item">vue双向绑定的原理</span></span></a></li><li><a class="level is-mobile" href="#来谈一谈你对vue项目做了哪些优化"><span class="level-left"><span class="level-item">14</span><span class="level-item">来谈一谈你对vue项目做了哪些优化</span></span></a></li><li><a class="level is-mobile" href="#生拷贝和浅拷贝的区别"><span class="level-left"><span class="level-item">15</span><span class="level-item">生拷贝和浅拷贝的区别</span></span></a></li><li><a class="level is-mobile" href="#Cookie、sessionStorage、localStorage的区别"><span class="level-left"><span class="level-item">16</span><span class="level-item">Cookie、sessionStorage、localStorage的区别</span></span></a></li><li><a class="level is-mobile" href="#data中可以返回对象吗"><span class="level-left"><span class="level-item">17</span><span class="level-item">data中可以返回对象吗</span></span></a></li><li><a class="level is-mobile" href="#绘制和重排有了解吗"><span class="level-left"><span class="level-item">18</span><span class="level-item">绘制和重排有了解吗</span></span></a></li><li><a class="level is-mobile" href="#数组有哪些方法"><span class="level-left"><span class="level-item">19</span><span class="level-item">数组有哪些方法</span></span></a></li><li><a class="level is-mobile" href="#es6中let，const-var的区别"><span class="level-left"><span class="level-item">20</span><span class="level-item">es6中let，const,var的区别</span></span></a></li><li><a class="level is-mobile" href="#es6箭头函数和普通函数的区别"><span class="level-left"><span class="level-item">21</span><span class="level-item">es6箭头函数和普通函数的区别</span></span></a></li><li><a class="level is-mobile" href="#vue2和vue3的区别"><span class="level-left"><span class="level-item">22</span><span class="level-item">vue2和vue3的区别</span></span></a></li><li><a class="level is-mobile" href="#数组排序有哪些方法"><span class="level-left"><span class="level-item">23</span><span class="level-item">数组排序有哪些方法</span></span></a></li><li><a class="level is-mobile" href="#如下那种前端构建技术可以剔除javascripc中没有被使用的代码"><span class="level-left"><span class="level-item">24</span><span class="level-item">如下那种前端构建技术可以剔除javascripc中没有被使用的代码</span></span></a></li><li><a class="level is-mobile" href="#怎么解决回调地狱"><span class="level-left"><span class="level-item">25</span><span class="level-item">怎么解决回调地狱</span></span></a></li><li><a class="level is-mobile" href="#js中数组里面的相同的元素如何去重"><span class="level-left"><span class="level-item">26</span><span class="level-item">js中数组里面的相同的元素如何去重</span></span></a></li><li><a class="level is-mobile" href="#vuex中的数据在页面刷新以后消失怎么办"><span class="level-left"><span class="level-item">27</span><span class="level-item">vuex中的数据在页面刷新以后消失怎么办</span></span></a></li><li><a class="level is-mobile" href="#vue中keep-alive的作用"><span class="level-left"><span class="level-item">28</span><span class="level-item">vue中keep-alive的作用</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/avatar.jpg" alt="Jie Growth Diary" height="28"></a><p class="is-size-7"><span>&copy; 2025 Zhang Jie</span><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><p class="is-size-7">2811932734@qq.com</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/zj261788/zj261788.github.io"><i class="fab fa-github"></i></a></p></div><div id="site-runtime"></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script data-pjax src="/js/click.js" defer></script><script data-pjax src="/js/snow.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>

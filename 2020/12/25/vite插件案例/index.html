@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>vite插件案例 - Jie Growth Diary</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Jie Growth Diary"><meta name="msapplication-TileImage" content="/img/avatar.jpg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Jie Growth Diary"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="学习"><meta property="og:type" content="blog"><meta property="og:title" content="vite插件案例"><meta property="og:url" content="https://zj261788.github.io/2020/12/25/vite%E6%8F%92%E4%BB%B6%E6%A1%88%E4%BE%8B/"><meta property="og:site_name" content="Jie Growth Diary"><meta property="og:description" content="学习"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://zj261788.github.io/img/og_image.png"><meta property="article:published_time" content="2020-12-24T16:00:00.000Z"><meta property="article:modified_time" content="2024-10-23T07:06:49.703Z"><meta property="article:author" content="Zhang Jie"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://zj261788.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://zj261788.github.io/2020/12/25/vite%E6%8F%92%E4%BB%B6%E6%A1%88%E4%BE%8B/"},"headline":"vite插件案例","image":["https://zj261788.github.io/img/og_image.png"],"datePublished":"2020-12-24T16:00:00.000Z","dateModified":"2024-10-23T07:06:49.703Z","author":{"@type":"Person","name":"Zhang Jie"},"publisher":{"@type":"Organization","name":"Jie Growth Diary","logo":{"@type":"ImageObject","url":"https://zj261788.github.io/img/avatar.jpg"}},"description":"学习"}</script><link rel="canonical" href="https://zj261788.github.io/2020/12/25/vite%E6%8F%92%E4%BB%B6%E6%A1%88%E4%BE%8B/"><link rel="icon" href="/img/avatar.jpg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link data-pjax rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/11.7.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><script src="/js/runtime.js"></script><script data-pjax src="/js/prism/prism.js" defer></script><link rel="stylesheet" href="/js/prism/prism.css"><link href="/js/copy/prism-toolbar.min.css" rel="stylesheet"><script src="/js/copy/prism-core.min.js"></script><script src="/js/copy/prism-toolbar.min.js"></script><script src="/js/copy/prism-copy-to-clipboard.min.js"></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-layout-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/avatar.jpg" alt="Jie Growth Diary" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/zj261788/zj261788.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item copyright article-title type-2">原创</span><span class="level-item"><time dateTime="2020-12-24T16:00:00.000Z" title="2020/12/25 00:00:00">2020-12-25</time>发表</span><span class="level-item"><time dateTime="2024-10-23T07:06:49.703Z" title="2024/10/23 15:06:49">2024-10-23</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%8F%92%E4%BB%B6/">插件</a></span><span class="level-item">13 分钟读完 (大约1947个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">vite插件案例</h1><div class="copyright article-block type-2"><p>版权申明：本文为原创文章，转载请注明原文出处</p><p>原文链接：<a href="https://zj261788.github.io/2020/12/25/vite%E6%8F%92%E4%BB%B6%E6%A1%88%E4%BE%8B/" target="_blank">https://zj261788.github.io/2020/12/25/vite%E6%8F%92%E4%BB%B6%E6%A1%88%E4%BE%8B/</a></p></div><div class="content"><h2 id="tailwindcss使用-vite项目"><a href="#tailwindcss使用-vite项目" class="headerlink" title="tailwindcss使用(vite项目)"></a>tailwindcss使用(vite项目)</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm i <span class="token operator">-</span><span class="token constant">D</span> tailwindcss postcss autoprefixer<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="项目根目录执行"><a href="#项目根目录执行" class="headerlink" title="项目根目录执行"></a>项目根目录执行</h3><span id="more"></span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npx tailwindcss init <span class="token operator">-</span>p<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="执行命令后会多出两个文件"><a href="#执行命令后会多出两个文件" class="headerlink" title="执行命令后会多出两个文件"></a>执行命令后会多出两个文件</h3><ol>
+<li>tailwind.config.js</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 作用<span class="token operator">:</span> 这个配置选项定义了如何启用暗模式。<span class="token string">"class"</span> 表示你可以通过添加一个特定的类（通常是 dark）到 <span class="token constant">HTML</span> 元素上来启用暗模式。例如，在 <span class="token constant">HTML</span> 或根元素上添加 <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"dark"</span>，Tailwind 将应用暗模式相关的样式。另一种选项是 <span class="token string">"media"</span>，它基于用户的系统主题设置自动启用暗模式。 <span class="token operator">--</span><span class="token operator">></span>
+  <span class="token literal-property property">darkMode</span><span class="token operator">:</span> <span class="token string">"class"</span><span class="token punctuation">,</span>
+  <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> Tailwind 将不会应用默认的 <span class="token constant">CSS</span> 重置规则 <span class="token operator">--</span><span class="token operator">></span>
+  <span class="token literal-property property">corePlugins</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">preflight</span><span class="token operator">:</span> <span class="token boolean">false</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 应该扫描哪些文件来生成所需的 <span class="token constant">CSS</span> 类 <span class="token operator">--</span><span class="token operator">></span>
+  <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"./index.html"</span><span class="token punctuation">,</span> <span class="token string">"./src/**/*.&#123;vue,js,ts,jsx,tsx&#125;"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">theme</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">extend</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">colors</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 自定义背景颜色 <span class="token operator">--</span><span class="token operator">></span>
+        <span class="token literal-property property">bg_color</span><span class="token operator">:</span> <span class="token string">"var(--el-bg-color)"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">primary</span><span class="token operator">:</span> <span class="token string">"var(--el-color-primary)"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">text_color_primary</span><span class="token operator">:</span> <span class="token string">"var(--el-text-color-primary)"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">text_color_regular</span><span class="token operator">:</span> <span class="token string">"var(--el-text-color-regular)"</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>postcss.config.js代码添加如下</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* 允许你在 CSS 文件中使用 @import 语法来引入其他 CSS 文件 */</span>
+    <span class="token string-property property">"postcss-import"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token comment">/*  Tailwind CSS 的一部分，用于支持嵌套 CSS 规则 */</span>
+    <span class="token string-property property">"tailwindcss/nesting"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token comment">/* 用于生成 Tailwind CSS 的实用类 */</span>
+    <span class="token literal-property property">tailwindcss</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token comment">/* 自动为你的 CSS 添加浏览器前缀 */</span>
+    <span class="token literal-property property">autoprefixer</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token comment">/* 生产环境，cssnano 插件将被启用 */</span>
+    <span class="token operator">...</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">===</span> <span class="token string">"production"</span> <span class="token operator">?</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">cssnano</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">&#125;</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a>使用案例</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
+<span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"w-32 h-32 bg-blue-500 dark:bg-green-500"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="svg插件使用"><a href="#svg插件使用" class="headerlink" title="svg插件使用"></a>svg插件使用</h2><h3 id="安装依赖-1"><a href="#安装依赖-1" class="headerlink" title="安装依赖"></a>安装依赖</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm i <span class="token operator">-</span><span class="token constant">D</span> vite<span class="token operator">-</span>svg<span class="token operator">-</span>loader<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="在vite-config-ts中的plugins里配置"><a href="#在vite-config-ts中的plugins里配置" class="headerlink" title="在vite.config.ts中的plugins里配置"></a>在vite.config.ts中的plugins里配置</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> svgLoader <span class="token keyword">from</span> <span class="token string">"vite-svg-loader"</span><span class="token punctuation">;</span>
+<span class="token literal-property property">plugins</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token function">svgLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="使用案例-1"><a href="#使用案例-1" class="headerlink" title="使用案例"></a>使用案例</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> avatar <span class="token keyword">from</span> <span class="token string">"@/assets/login/avatar.svg?component"</span><span class="token punctuation">;</span>
+<span class="token operator">&lt;</span>avatar <span class="token operator">/</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>component <span class="token operator">:</span>is<span class="token operator">=</span><span class="token string">"toRaw2(avatar)"</span> <span class="token operator">/</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="mock支持"><a href="#mock支持" class="headerlink" title="mock支持"></a>mock支持</h2><h3 id="安装依赖-2"><a href="#安装依赖-2" class="headerlink" title="安装依赖"></a>安装依赖</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm i vite<span class="token operator">-</span>plugin<span class="token operator">-</span>fake<span class="token operator">-</span>server <span class="token operator">-</span><span class="token constant">D</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="在vite-config-ts中的plugins里配置-1"><a href="#在vite-config-ts中的plugins里配置-1" class="headerlink" title="在vite.config.ts中的plugins里配置"></a>在vite.config.ts中的plugins里配置</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> vitePluginFakeServer <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vite-plugin-fake-server"</span><span class="token punctuation">;</span>
+<span class="token literal-property property">plugins</span><span class="token operator">:</span><span class="token punctuation">[</span>
+  <span class="token function">vitePluginFakeServer</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">logger</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">include</span><span class="token operator">:</span> <span class="token string">"mock"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">infixName</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">enableProd</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="然后在项目根目录下创建mock文件夹"><a href="#然后在项目根目录下创建mock文件夹" class="headerlink" title="然后在项目根目录下创建mock文件夹"></a>然后在项目根目录下创建mock文件夹</h3><ol>
+<li>代码如下已登录接口为例子新建login.ts</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> defineFakeRoute <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vite-plugin-fake-server/client"</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineFakeRoute</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"/login"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">method</span><span class="token operator">:</span> <span class="token string">"post"</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">response</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> body <span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>body<span class="token punctuation">.</span>username <span class="token operator">===</span> <span class="token string">"admin"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">success</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token literal-property property">avatar</span><span class="token operator">:</span> <span class="token string">"https://avatars.githubusercontent.com/u/44761321"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">username</span><span class="token operator">:</span> <span class="token string">"admin"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">nickname</span><span class="token operator">:</span> <span class="token string">"小铭"</span><span class="token punctuation">,</span>
+            <span class="token comment">// 一个用户可能有多个角色</span>
+            <span class="token literal-property property">roles</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"admin"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">accessToken</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJIUzUxMiJ9.admin"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">refreshToken</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJIUzUxMiJ9.adminRefresh"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">expires</span><span class="token operator">:</span> <span class="token string">"2030/10/30 00:00:00"</span>
+          <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">success</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token literal-property property">avatar</span><span class="token operator">:</span> <span class="token string">"https://avatars.githubusercontent.com/u/52823142"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">username</span><span class="token operator">:</span> <span class="token string">"common"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">nickname</span><span class="token operator">:</span> <span class="token string">"小林"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">roles</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"common"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">accessToken</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJIUzUxMiJ9.common"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">refreshToken</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJIUzUxMiJ9.commonRefresh"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">expires</span><span class="token operator">:</span> <span class="token string">"2030/10/30 00:00:00"</span>
+          <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="eslint代码和prettier格式化检查"><a href="#eslint代码和prettier格式化检查" class="headerlink" title="eslint代码和prettier格式化检查"></a>eslint代码和prettier格式化检查</h2><h3 id="安装依赖-3"><a href="#安装依赖-3" class="headerlink" title="安装依赖"></a>安装依赖</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm i eslint @eslint<span class="token operator">/</span>js eslint<span class="token operator">-</span>config<span class="token operator">-</span>prettier eslint<span class="token operator">-</span>define<span class="token operator">-</span>config eslint<span class="token operator">-</span>plugin<span class="token operator">-</span>prettier eslint<span class="token operator">-</span>plugin<span class="token operator">-</span>vue @typescript<span class="token operator">-</span>eslint<span class="token operator">/</span>eslint<span class="token operator">-</span>plugin @typescript<span class="token operator">-</span>eslint<span class="token operator">/</span>parser  <span class="token operator">-</span><span class="token constant">D</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="在项目根目录下创建eslint-config-js代码如下"><a href="#在项目根目录下创建eslint-config-js代码如下" class="headerlink" title="在项目根目录下创建eslint.config.js代码如下"></a>在项目根目录下创建eslint.config.js代码如下</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> defineFlatConfig <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"eslint-define-config"</span><span class="token punctuation">;</span>
+<span class="token comment">/*  eslint模块配置 */</span>
+<span class="token keyword">import</span> js <span class="token keyword">from</span> <span class="token string">"@eslint/js"</span><span class="token punctuation">;</span>
+<span class="token comment">/* Vue.js 相关的 ESLint  */</span>
+<span class="token keyword">import</span> pluginVue <span class="token keyword">from</span> <span class="token string">"eslint-plugin-vue"</span><span class="token punctuation">;</span>
+<span class="token comment">/* 用于解析 Vue 文件的 ESLint 解析器 */</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> parserVue <span class="token keyword">from</span> <span class="token string">"vue-eslint-parser"</span><span class="token punctuation">;</span>
+<span class="token comment">/* 分别导入与 Prettier 集成的 ESLint 配置和插件。 */</span>
+<span class="token keyword">import</span> configPrettier <span class="token keyword">from</span> <span class="token string">"eslint-config-prettier"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> pluginPrettier <span class="token keyword">from</span> <span class="token string">"eslint-plugin-prettier"</span><span class="token punctuation">;</span>
+<span class="token comment">/* 分别导入用于 TypeScript 文件的 ESLint 解析器和相关插件 */</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> parserTypeScript <span class="token keyword">from</span> <span class="token string">"@typescript-eslint/parser"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> pluginTypeScript <span class="token keyword">from</span> <span class="token string">"@typescript-eslint/eslint-plugin"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineFlatConfig</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+  <span class="token comment">/* 所有文件 */</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* 基于 JavaScript 的推荐配置，设置了一些特定文件和全局变量的忽略规则，以及集成了 Prettier 插件的规则 */</span>
+    <span class="token operator">...</span>js<span class="token punctuation">.</span>configs<span class="token punctuation">.</span>recommended<span class="token punctuation">,</span>
+    <span class="token comment">/* 指定需要忽略的文件和路径模式 */</span>
+    <span class="token literal-property property">ignores</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"**/.*"</span><span class="token punctuation">,</span>
+      <span class="token string">"dist/*"</span><span class="token punctuation">,</span>
+      <span class="token string">"*.d.ts"</span><span class="token punctuation">,</span>
+      <span class="token string">"public/*"</span><span class="token punctuation">,</span>
+      <span class="token string">"src/assets/**"</span><span class="token punctuation">,</span>
+      <span class="token string">"src/**/iconfont/**"</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment">/* 指定了一些全局变量，并将它们标记为只读 */</span>
+    <span class="token literal-property property">languageOptions</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">globals</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">RefType</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">EmitType</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">TargetContext</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">ComponentRef</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">ElRef</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">ForDataType</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">AnyFunction</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">PropType</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">Writable</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">Nullable</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">NonNullable</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">Recordable</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">ReadonlyRecordable</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">Indexable</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">DeepPartial</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">Without</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">Exclusive</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">TimeoutHandle</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">IntervalHandle</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">Effect</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">ChangeEvent</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">WheelEvent</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">ImportMetaEnv</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">Fn</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">PromiseFn</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">ComponentElRef</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">parseInt</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">parseFloat</span><span class="token operator">:</span> <span class="token string">"readonly"</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token comment">/* 启用了 Prettier 插件 */</span>
+    <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">prettier</span><span class="token operator">:</span> pluginPrettier
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token comment">/* 其中包括了 Prettier 的规则以及其他特定的 ESLint 规则 */</span>
+    <span class="token literal-property property">rules</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token operator">...</span>configPrettier<span class="token punctuation">.</span>rules<span class="token punctuation">,</span>
+      <span class="token operator">...</span>pluginPrettier<span class="token punctuation">.</span>configs<span class="token punctuation">.</span>recommended<span class="token punctuation">.</span>rules<span class="token punctuation">,</span>
+      <span class="token string-property property">"no-unused-vars"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"error"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">argsIgnorePattern</span><span class="token operator">:</span> <span class="token string">"^_"</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">varsIgnorePattern</span><span class="token operator">:</span> <span class="token string">"^_"</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"prettier/prettier"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"error"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">endOfLine</span><span class="token operator">:</span> <span class="token string">"auto"</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token comment">/* 针对.vue文件规则 */</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">files</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"**/*.vue"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">languageOptions</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">globals</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">$</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">$$</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">$computed</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">$customRef</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">$ref</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">$shallowRef</span><span class="token operator">:</span> <span class="token string">"readonly"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">$toRef</span><span class="token operator">:</span> <span class="token string">"readonly"</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">parser</span><span class="token operator">:</span> parserVue<span class="token punctuation">,</span>
+      <span class="token literal-property property">parserOptions</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">ecmaFeatures</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">jsx</span><span class="token operator">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">extraFileExtensions</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">".vue"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">parser</span><span class="token operator">:</span> <span class="token string">"@typescript-eslint/parser"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">sourceType</span><span class="token operator">:</span> <span class="token string">"module"</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">vue</span><span class="token operator">:</span> pluginVue
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">processor</span><span class="token operator">:</span> pluginVue<span class="token punctuation">.</span>processors<span class="token punctuation">[</span><span class="token string">".vue"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">rules</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token operator">...</span>pluginVue<span class="token punctuation">.</span>configs<span class="token punctuation">.</span>base<span class="token punctuation">.</span>rules<span class="token punctuation">,</span>
+      <span class="token operator">...</span>pluginVue<span class="token punctuation">.</span>configs<span class="token punctuation">[</span><span class="token string">"vue3-essential"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>rules<span class="token punctuation">,</span>
+      <span class="token operator">...</span>pluginVue<span class="token punctuation">.</span>configs<span class="token punctuation">[</span><span class="token string">"vue3-recommended"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>rules<span class="token punctuation">,</span>
+      <span class="token string-property property">"no-undef"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"no-unused-vars"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"vue/no-v-html"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"vue/require-default-prop"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"vue/require-explicit-emits"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"vue/multi-word-component-names"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"vue/no-setup-props-reactivity-loss"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"vue/html-self-closing"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"error"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">html</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">void</span><span class="token operator">:</span> <span class="token string">"always"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">normal</span><span class="token operator">:</span> <span class="token string">"always"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">component</span><span class="token operator">:</span> <span class="token string">"always"</span>
+          <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">svg</span><span class="token operator">:</span> <span class="token string">"always"</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">math</span><span class="token operator">:</span> <span class="token string">"always"</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token comment">/* TypeScript 文件的配置 */</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">files</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"**/*.?([cm])ts"</span><span class="token punctuation">,</span> <span class="token string">"**/*.?([cm])tsx"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">languageOptions</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">parser</span><span class="token operator">:</span> parserTypeScript<span class="token punctuation">,</span>
+      <span class="token literal-property property">parserOptions</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">sourceType</span><span class="token operator">:</span> <span class="token string">"module"</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token string-property property">"@typescript-eslint"</span><span class="token operator">:</span> pluginTypeScript
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">rules</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token operator">...</span>pluginTypeScript<span class="token punctuation">.</span>configs<span class="token punctuation">.</span>strict<span class="token punctuation">.</span>rules<span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/no-unused-expressions"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/no-this-alias"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/ban-types"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/no-redeclare"</span><span class="token operator">:</span> <span class="token string">"error"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/ban-ts-comment"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/no-explicit-any"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/prefer-as-const"</span><span class="token operator">:</span> <span class="token string">"warn"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/no-empty-function"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/no-non-null-assertion"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/no-import-type-side-effects"</span><span class="token operator">:</span> <span class="token string">"error"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/explicit-module-boundary-types"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/consistent-type-imports"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"error"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span> <span class="token literal-property property">disallowTypeAnnotations</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token literal-property property">fixStyle</span><span class="token operator">:</span> <span class="token string">"inline-type-imports"</span> <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/prefer-literal-enum-member"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"error"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span> <span class="token literal-property property">allowBitwiseExpressions</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/no-unused-vars"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"error"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">argsIgnorePattern</span><span class="token operator">:</span> <span class="token string">"^_"</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">varsIgnorePattern</span><span class="token operator">:</span> <span class="token string">"^_"</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token comment">/* 针对.d.ts文件规则 */</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">files</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"**/*.d.ts"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">rules</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token string-property property">"eslint-comments/no-unlimited-disable"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"import/no-duplicates"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"unused-imports/no-unused-vars"</span><span class="token operator">:</span> <span class="token string">"off"</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token comment">/* 针对.js文件规则 */</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">files</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"**/*.?([cm])js"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">rules</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token string-property property">"@typescript-eslint/no-require-imports"</span><span class="token operator">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"@typescript-eslint/no-var-requires"</span><span class="token operator">:</span> <span class="token string">"off"</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>在package.json添加命令</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token string-property property">"scripts"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+   <span class="token string-property property">"lint:eslint"</span><span class="token operator">:</span> <span class="token string">"eslint --cache --max-warnings 0  \"&#123;src,mock,build&#125;/**/*.&#123;vue,js,ts,tsx&#125;\" --fix"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"lint:prettier"</span><span class="token operator">:</span> <span class="token string">"prettier --write  \"**/*.&#123;js,ts,json,tsx,css,scss,vue,html,md&#125;\""</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="stylelint代码样式检查"><a href="#stylelint代码样式检查" class="headerlink" title="stylelint代码样式检查"></a>stylelint代码样式检查</h2><h3 id="安装依赖-4"><a href="#安装依赖-4" class="headerlink" title="安装依赖"></a>安装依赖</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm i stylelint stylelint<span class="token operator">-</span>config<span class="token operator">-</span>recess<span class="token operator">-</span>order stylelint<span class="token operator">-</span>config<span class="token operator">-</span>recommended<span class="token operator">-</span>vue stylelint<span class="token operator">-</span>config<span class="token operator">-</span>standard<span class="token operator">-</span>scss stylelint<span class="token operator">-</span>prettier  <span class="token operator">-</span><span class="token constant">D</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="在项目根目录下创建stylelint-config-js代码如下"><a href="#在项目根目录下创建stylelint-config-js代码如下" class="headerlink" title="在项目根目录下创建stylelint.config.js代码如下"></a>在项目根目录下创建stylelint.config.js代码如下</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">extends</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"stylelint-config-standard"</span><span class="token punctuation">,</span>
+    <span class="token string">"stylelint-config-html/vue"</span><span class="token punctuation">,</span>
+    <span class="token string">"stylelint-config-recess-order"</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"stylelint-scss"</span><span class="token punctuation">,</span> <span class="token string">"stylelint-order"</span><span class="token punctuation">,</span> <span class="token string">"stylelint-prettier"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">overrides</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">files</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"**/*.(css|html|vue)"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">customSyntax</span><span class="token operator">:</span> <span class="token string">"postcss-html"</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">files</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"*.scss"</span><span class="token punctuation">,</span> <span class="token string">"**/*.scss"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">customSyntax</span><span class="token operator">:</span> <span class="token string">"postcss-scss"</span><span class="token punctuation">,</span>
+      <span class="token keyword">extends</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"stylelint-config-standard-scss"</span><span class="token punctuation">,</span>
+        <span class="token string">"stylelint-config-recommended-vue/scss"</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">rules</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"prettier/prettier"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"selector-class-pattern"</span><span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"no-descending-specificity"</span><span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"scss/dollar-variable-pattern"</span><span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"selector-pseudo-class-no-unknown"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">ignorePseudoClasses</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"deep"</span><span class="token punctuation">,</span> <span class="token string">"global"</span><span class="token punctuation">]</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"selector-pseudo-element-no-unknown"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">ignorePseudoElements</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"v-deep"</span><span class="token punctuation">,</span> <span class="token string">"v-global"</span><span class="token punctuation">,</span> <span class="token string">"v-slotted"</span><span class="token punctuation">]</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"at-rule-no-unknown"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">ignoreAtRules</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token string">"tailwind"</span><span class="token punctuation">,</span>
+          <span class="token string">"apply"</span><span class="token punctuation">,</span>
+          <span class="token string">"variants"</span><span class="token punctuation">,</span>
+          <span class="token string">"responsive"</span><span class="token punctuation">,</span>
+          <span class="token string">"screen"</span><span class="token punctuation">,</span>
+          <span class="token string">"function"</span><span class="token punctuation">,</span>
+          <span class="token string">"if"</span><span class="token punctuation">,</span>
+          <span class="token string">"each"</span><span class="token punctuation">,</span>
+          <span class="token string">"include"</span><span class="token punctuation">,</span>
+          <span class="token string">"mixin"</span><span class="token punctuation">,</span>
+          <span class="token string">"use"</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"rule-empty-line-before"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"always"</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">ignore</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"after-comment"</span><span class="token punctuation">,</span> <span class="token string">"first-nested"</span><span class="token punctuation">]</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"unit-no-unknown"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">ignoreUnits</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"rpx"</span><span class="token punctuation">]</span> <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"order/order"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">[</span>
+        <span class="token string">"dollar-variables"</span><span class="token punctuation">,</span>
+        <span class="token string">"custom-properties"</span><span class="token punctuation">,</span>
+        <span class="token string">"at-rules"</span><span class="token punctuation">,</span>
+        <span class="token string">"declarations"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"at-rule"</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"supports"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"at-rule"</span><span class="token punctuation">,</span>
+          <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"media"</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token string">"rules"</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#123;</span> <span class="token literal-property property">severity</span><span class="token operator">:</span> <span class="token string">"warning"</span> <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">ignoreFiles</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"**/*.js"</span><span class="token punctuation">,</span> <span class="token string">"**/*.ts"</span><span class="token punctuation">,</span> <span class="token string">"**/*.jsx"</span><span class="token punctuation">,</span> <span class="token string">"**/*.tsx"</span><span class="token punctuation">,</span> <span class="token string">"report.html"</span><span class="token punctuation">,</span><span class="token string">"dist/**/*"</span><span class="token punctuation">,</span><span class="token string">"public/**/*"</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><p>在package.json添加命令</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token string-property property">"scripts"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+   <span class="token string-property property">"lint:stylelint"</span><span class="token operator">:</span> <span class="token string">"stylelint --cache --fix \"**/*.&#123;html,vue,css,scss&#125;\" --cache-location node_modules/.cache/stylelint/"</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="css代码压缩优化打包体积"><a href="#css代码压缩优化打包体积" class="headerlink" title="css代码压缩优化打包体积"></a>css代码压缩优化打包体积</h2><h3 id="安装依赖-5"><a href="#安装依赖-5" class="headerlink" title="安装依赖"></a>安装依赖</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm install postcss <span class="token operator">--</span>save<span class="token operator">-</span>dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="一些常见插件（使用这些需要npm安装）"><a href="#一些常见插件（使用这些需要npm安装）" class="headerlink" title="一些常见插件（使用这些需要npm安装）"></a>一些常见插件（使用这些需要npm安装）</h3><p>一些常用的插件与作用<br>autoprefixer：自动添加 CSS3 前缀。<br>cssnano：优化和压缩 CSS。<br>postcss-import：通过 @import 导入 CSS 文件。<br>postcss-custom-properties：使用自定义属性，类似于 Sass 中的变量。<br>postcss-nested：允许使用嵌套规则。<br>postcss-mixins：类似于 Sass 中的 mixin。<br>postcss-css-variables：支持 CSS 变量。<br>postcss-preset-env：使用最新的 CSS 语法，自动添加前缀，按需加载 polyfill。<br>postcss-normalize：添加浏览器默认样式的规则，以消除浏览器之间的差异。<br>postcss-pxtorem：将像素值转换成 rem 值，使得页面更好地适配不同大小的设备。<br>postcss-extend：类似于 Sass 中的 @extend。<br>postcss-flexbugs-fixes：修复 Flexbox 布局的一些 bug。</p>
+<pre class="line-numbers language-none"><code class="language-none">
+### 在项目跟目录新建postcss.config.js
+
+1. 代码如下
+
+&#96;&#96;&#96;js
+export default &#123;
+  plugins: &#123;
+    &#x2F;* 允许你在 CSS 文件中使用 @import 语法来引入其他 CSS 文件 *&#x2F;
+    &quot;postcss-import&quot;: &#123;&#125;,
+    &#x2F;*  Tailwind CSS 的一部分，用于支持嵌套 CSS 规则 *&#x2F;
+    &quot;tailwindcss&#x2F;nesting&quot;: &#123;&#125;,
+    &#x2F;* 用于生成 Tailwind CSS 的实用类 *&#x2F;
+    tailwindcss: &#123;&#125;,
+    &#x2F;* 自动为你的 CSS 添加浏览器前缀 *&#x2F;
+    autoprefixer: &#123;
+      overrideBrowserslist: [
+        &quot;Android 4.1&quot;,
+        &quot;iOS 7.1&quot;,
+        &quot;Chrome &gt; 31&quot;,
+        &quot;ff &gt; 31&quot;,
+        &quot;ie &gt;&#x3D; 8&quot;,
+        &quot;last 10 versions&quot; &#x2F;&#x2F; 所有主流浏览器最近2个版本
+      ]
+    &#125;,
+    &#x2F;* 生产环境，cssnano 插件将被启用:使用默认的配置 *&#x2F;
+    ...(process.env.NODE_ENV &#x3D;&#x3D;&#x3D; &quot;production&quot;
+      ? &#123; cssnano: &#123; preset: &quot;default&quot; &#125; &#125;
+      : &#123;&#125;),
+    &#39;postcss-pxtorem&#39;: &#123;
+      rootValue: 37.5, &#x2F;* 平板13.5  app37.5 *&#x2F;
+      unitPrecision: 10, &#x2F;* 最小精度，小数点位数 *&#x2F;
+      propList: [&#39;*&#39;], &#x2F;* 匹配属性  *代表所有 *&#x2F;
+      minPixelValue: 1, &#x2F;* 计算的最小像素值1px *&#x2F;
+    &#125;,
+  &#125;
+&#125;;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="wcjiang-notify使用-浏览器消息提醒"><a href="#wcjiang-notify使用-浏览器消息提醒" class="headerlink" title="@wcjiang/notify使用(浏览器消息提醒)"></a>@wcjiang/notify使用(浏览器消息提醒)</h2><h3 id="安装依赖-6"><a href="#安装依赖-6" class="headerlink" title="安装依赖"></a>安装依赖</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm i @wcjiang<span class="token operator">/</span>notify <span class="token operator">-</span><span class="token constant">D</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> Notify <span class="token keyword">from</span> <span class="token string">"@wcjiang/notify"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> notify <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Notify</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">"There is message."</span><span class="token punctuation">,</span> <span class="token comment">// page title.</span>
+  <span class="token literal-property property">effect</span><span class="token operator">:</span> <span class="token string">"flash"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">audio</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">file</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"msg.mp4"</span><span class="token punctuation">]</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">disableFavicon</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">interval</span><span class="token operator">:</span> <span class="token number">1000</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+notify<span class="token punctuation">.</span><span class="token function">player</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+notify<span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Play animation</span>
+notify<span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token string">"有新消息，请注意查收！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Flashing new title</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  notify<span class="token punctuation">.</span><span class="token function">clearTimer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="更多配置请查看官网"><a href="#更多配置请查看官网" class="headerlink" title="更多配置请查看官网"></a>更多配置请查看官网</h3><p><a target="_blank" rel="noopener" href="https://wangchujiang.com/iNotify/">官网</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>vite插件案例</p><p><a href="https://zj261788.github.io/2020/12/25/vite插件案例/">https://zj261788.github.io/2020/12/25/vite插件案例/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Zhang Jie</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-12-25</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-10-23</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/zhifubaio.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/weix.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/12/25/markdown/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">markdown语法学习</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/12/25/vuePackage/"><span class="level-item">Vue CLI 生成的 Vue 项目依赖解释</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "9297d72ccb0f915c2eee5357569465b2",
+            repo: "zj261788.github.io",
+            owner: "zj261788",
+            clientID: "Ov23ct9JCRJDGQUYlI1J",
+            clientSecret: "cdf5c517455379efbc0b9ccde0525b21938bc03e",
+            admin: ["zj261788"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 3,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.jpg" alt="ZJ261788"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">ZJ261788</p><p class="is-size-6 is-block">普普通通的IT打工族</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">23</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">3</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/zj261788" target="_blank" rel="me noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/zj261788"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#tailwindcss使用-vite项目"><span class="level-left"><span class="level-item">1</span><span class="level-item">tailwindcss使用(vite项目)</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装依赖"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">安装依赖</span></span></a></li><li><a class="level is-mobile" href="#项目根目录执行"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">项目根目录执行</span></span></a></li><li><a class="level is-mobile" href="#执行命令后会多出两个文件"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">执行命令后会多出两个文件</span></span></a></li><li><a class="level is-mobile" href="#使用案例"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">使用案例</span></span></a></li></ul></li><li><a class="level is-mobile" href="#svg插件使用"><span class="level-left"><span class="level-item">2</span><span class="level-item">svg插件使用</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装依赖-1"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">安装依赖</span></span></a></li><li><a class="level is-mobile" href="#在vite-config-ts中的plugins里配置"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">在vite.config.ts中的plugins里配置</span></span></a></li><li><a class="level is-mobile" href="#使用案例-1"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">使用案例</span></span></a></li></ul></li><li><a class="level is-mobile" href="#mock支持"><span class="level-left"><span class="level-item">3</span><span class="level-item">mock支持</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装依赖-2"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">安装依赖</span></span></a></li><li><a class="level is-mobile" href="#在vite-config-ts中的plugins里配置-1"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">在vite.config.ts中的plugins里配置</span></span></a></li><li><a class="level is-mobile" href="#然后在项目根目录下创建mock文件夹"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">然后在项目根目录下创建mock文件夹</span></span></a></li></ul></li><li><a class="level is-mobile" href="#eslint代码和prettier格式化检查"><span class="level-left"><span class="level-item">4</span><span class="level-item">eslint代码和prettier格式化检查</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装依赖-3"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">安装依赖</span></span></a></li><li><a class="level is-mobile" href="#在项目根目录下创建eslint-config-js代码如下"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">在项目根目录下创建eslint.config.js代码如下</span></span></a></li><li><a class="level is-mobile" href="#使用"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">使用</span></span></a></li></ul></li><li><a class="level is-mobile" href="#stylelint代码样式检查"><span class="level-left"><span class="level-item">5</span><span class="level-item">stylelint代码样式检查</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装依赖-4"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">安装依赖</span></span></a></li><li><a class="level is-mobile" href="#在项目根目录下创建stylelint-config-js代码如下"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">在项目根目录下创建stylelint.config.js代码如下</span></span></a></li><li><a class="level is-mobile" href="#使用-1"><span class="level-left"><span class="level-item">5.3</span><span class="level-item">使用</span></span></a></li></ul></li><li><a class="level is-mobile" href="#css代码压缩优化打包体积"><span class="level-left"><span class="level-item">6</span><span class="level-item">css代码压缩优化打包体积</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装依赖-5"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">安装依赖</span></span></a></li><li><a class="level is-mobile" href="#一些常见插件（使用这些需要npm安装）"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">一些常见插件（使用这些需要npm安装）</span></span></a></li></ul></li><li><a class="level is-mobile" href="#wcjiang-notify使用-浏览器消息提醒"><span class="level-left"><span class="level-item">7</span><span class="level-item">@wcjiang/notify使用(浏览器消息提醒)</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装依赖-6"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">安装依赖</span></span></a></li><li><a class="level is-mobile" href="#使用-2"><span class="level-left"><span class="level-item">7.2</span><span class="level-item">使用</span></span></a></li><li><a class="level is-mobile" href="#更多配置请查看官网"><span class="level-left"><span class="level-item">7.3</span><span class="level-item">更多配置请查看官网</span></span></a></li></ul></li></ul></div></div><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/avatar.jpg" alt="Jie Growth Diary" height="28"></a><p class="is-size-7"><span>&copy; 2025 Zhang Jie</span><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><p class="is-size-7">2811932734@qq.com</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/zj261788/zj261788.github.io"><i class="fab fa-github"></i></a></p></div><div id="site-runtime"></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script data-pjax src="/js/click.js" defer></script><script data-pjax src="/js/snow.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>
