@@ -1,0 +1,930 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>明道云插件开发 - Jie Growth Diary</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Jie Growth Diary"><meta name="msapplication-TileImage" content="/img/avatar.jpg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Jie Growth Diary"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="明道云 updateWorksheetRow 接口中，下拉类型字段（单选 type&amp;#x3D;11、多选 type&amp;#x3D;10）的 value 必须是 JSON 数组格式的选项 key，如 &amp;quot;[\&amp;quot;844f2012-1ee5-4d70-b08e-68da32678c6c\&amp;quot;]&amp;quot;，不能直接传显示文本。普通文本字段直接传字符串即可。 Why: 明道云 API 对不同控件类型的"><meta property="og:type" content="blog"><meta property="og:title" content="明道云插件开发"><meta property="og:url" content="https://zj261788.github.io/2026/04/29/%E6%98%8E%E9%81%93%E4%BA%91%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/"><meta property="og:site_name" content="Jie Growth Diary"><meta property="og:description" content="明道云 updateWorksheetRow 接口中，下拉类型字段（单选 type&amp;#x3D;11、多选 type&amp;#x3D;10）的 value 必须是 JSON 数组格式的选项 key，如 &amp;quot;[\&amp;quot;844f2012-1ee5-4d70-b08e-68da32678c6c\&amp;quot;]&amp;quot;，不能直接传显示文本。普通文本字段直接传字符串即可。 Why: 明道云 API 对不同控件类型的"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://zj261788.github.io/img/og_image.png"><meta property="article:published_time" content="2026-04-28T16:00:00.000Z"><meta property="article:modified_time" content="2026-04-30T03:35:51.286Z"><meta property="article:author" content="Zhang Jie"><meta property="article:tag" content="技术"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://zj261788.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://zj261788.github.io/2026/04/29/%E6%98%8E%E9%81%93%E4%BA%91%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/"},"headline":"明道云插件开发","image":["https://zj261788.github.io/img/og_image.png"],"datePublished":"2026-04-28T16:00:00.000Z","dateModified":"2026-04-30T03:35:51.286Z","author":{"@type":"Person","name":"Zhang Jie"},"publisher":{"@type":"Organization","name":"Jie Growth Diary","logo":{"@type":"ImageObject","url":"https://zj261788.github.io/img/avatar.jpg"}},"description":"明道云 updateWorksheetRow 接口中，下拉类型字段（单选 type&#x3D;11、多选 type&#x3D;10）的 value 必须是 JSON 数组格式的选项 key，如 &quot;[\\&quot;844f2012-1ee5-4d70-b08e-68da32678c6c\\&quot;]&quot;，不能直接传显示文本。普通文本字段直接传字符串即可。 Why: 明道云 API 对不同控件类型的"}</script><link rel="canonical" href="https://zj261788.github.io/2026/04/29/%E6%98%8E%E9%81%93%E4%BA%91%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/"><link rel="icon" href="/img/avatar.jpg"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link data-pjax rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/11.7.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><script src="/js/runtime.js"></script><script data-pjax src="/js/prism/prism.js" defer></script><link rel="stylesheet" href="/js/prism/prism.css"><link href="/js/copy/prism-toolbar.min.css" rel="stylesheet"><script src="/js/copy/prism-core.min.js"></script><script src="/js/copy/prism-toolbar.min.js"></script><script src="/js/copy/prism-copy-to-clipboard.min.js"></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-layout-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/avatar.jpg" alt="Jie Growth Diary" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/zj261788/zj261788.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item copyright article-title type-2">原创</span><span class="level-item"><time dateTime="2026-04-28T16:00:00.000Z" title="2026/4/29 00:00:00">2026-04-29</time>发表</span><span class="level-item"><time dateTime="2026-04-30T03:35:51.286Z" title="2026/4/30 11:35:51">2026-04-30</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></span><span class="level-item">18 分钟读完 (大约2761个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">明道云插件开发</h1><div class="copyright article-block type-2"><p>版权申明：本文为原创文章，转载请注明原文出处</p><p>原文链接：<a href="https://zj261788.github.io/2026/04/29/%E6%98%8E%E9%81%93%E4%BA%91%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/" target="_blank">https://zj261788.github.io/2026/04/29/%E6%98%8E%E9%81%93%E4%BA%91%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/</a></p></div><div class="content"><p>明道云 <code>updateWorksheetRow</code> 接口中，下拉类型字段（单选 type=11、多选 type=10）的 value 必须是 JSON 数组格式的选项 key，如 <code>&quot;[\&quot;844f2012-1ee5-4d70-b08e-68da32678c6c\&quot;]&quot;</code>，不能直接传显示文本。普通文本字段直接传字符串即可。</p>
+<p><strong>Why:</strong> 明道云 API 对不同控件类型的 value 格式有严格区分，下拉字段用选项 key 的 JSON 数组，文本字段用纯字符串。传错格式会导致 400 报错。</p>
+<p><strong>How to apply:</strong> 编辑表格单元格时，需通过 fieldMeta 判断字段类型。下拉字段用 el-select 渲染，选中后发送选项 key 并用 <code>JSON.stringify([key])</code> 包装；本地状态则需把 key 反查回显示文本以保持表格显示正确。同时注意在组件间传递事件时，必须把 <code>isOption</code> 标志一路透传到底层 API 调用处，不能在中途丢失。</p>
+<p><strong>明道云插件开发必须使用 <code>mdye</code> 提供的 API，不要直接使用标准 fetch 或 axios</strong></p>
+<p><strong>Why:</strong> 明道云插件运行在沙箱环境中，有内置的认证和请求封装。直接调用外部 API 会缺少必要的 token 和上下文信息。</p>
+<p><strong>How to apply:</strong></p>
+<h2 id="1-导入方式"><a href="#1-导入方式" class="headerlink" title="1. 导入方式"></a>1. 导入方式</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span>config<span class="token punctuation">,</span> api<span class="token punctuation">,</span> md_emitter<span class="token punctuation">,</span> env<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"mdye"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="2-从-config-获取基本信息"><a href="#2-从-config-获取基本信息" class="headerlink" title="2. 从 config 获取基本信息"></a>2. 从 config 获取基本信息</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token punctuation">&#123;</span>appId<span class="token punctuation">,</span> worksheetId<span class="token punctuation">,</span> viewId<span class="token punctuation">,</span> controls<span class="token punctuation">&#125;</span> <span class="token operator">=</span> config<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="3-从-api-解构需要的-API-函数"><a href="#3-从-api-解构需要的-API-函数" class="headerlink" title="3. 从 api 解构需要的 API 函数"></a>3. 从 api 解构需要的 API 函数</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token punctuation">&#123;</span>
+  getWorksheetInfo<span class="token punctuation">,</span> <span class="token comment">// 获取工作表信息（含控件配置）</span>
+  getFilterRows<span class="token punctuation">,</span> <span class="token comment">// 获取过滤行数据</span>
+  getRowDetail<span class="token punctuation">,</span> <span class="token comment">// 获取行详情</span>
+  getRowRelationRows<span class="token punctuation">,</span> <span class="token comment">// 获取关联表行数据</span>
+  getFilterRowsTotalNum<span class="token punctuation">,</span> <span class="token comment">// 获取过滤行总数</span>
+  updateWorksheetRow<span class="token punctuation">,</span> <span class="token comment">// 更新行数据</span>
+  addWorksheetRow <span class="token comment">// 新增行</span>
+<span class="token punctuation">&#125;</span> <span class="token operator">=</span> api<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="4-从-env-获取插件配置"><a href="#4-从-env-获取插件配置" class="headerlink" title="4. 从 env 获取插件配置"></a>4. 从 env 获取插件配置</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 使用 env.show_field 控制表格显示字段</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>env<span class="token punctuation">.</span>show_field <span class="token operator">&amp;&amp;</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>env<span class="token punctuation">.</span>show_field<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  tableColumns<span class="token punctuation">.</span>value <span class="token operator">=</span> controls<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">c</span><span class="token punctuation">)</span> <span class="token operator">=></span> env<span class="token punctuation">.</span>show_field<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>controlId<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="5-常用-API-调用"><a href="#5-常用-API-调用" class="headerlink" title="5. 常用 API 调用"></a>5. 常用 API 调用</h2><h3 id="获取工作表信息"><a href="#获取工作表信息" class="headerlink" title="获取工作表信息"></a>获取工作表信息</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> worksheetInfo <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getWorksheetInfo</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>worksheetId<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 返回: &#123; name, template: &#123; controls &#125;, ... &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="10-查找控件的方法"><a href="#10-查找控件的方法" class="headerlink" title="10. 查找控件的方法"></a>10. 查找控件的方法</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 通过alias查找</span>
+<span class="token keyword">const</span> control <span class="token operator">=</span> controls<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">c</span><span class="token punctuation">)</span> <span class="token operator">=></span> c<span class="token punctuation">.</span>alias <span class="token operator">===</span> <span class="token string">"xxx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="获取过滤行数据"><a href="#获取过滤行数据" class="headerlink" title="获取过滤行数据"></a>获取过滤行数据</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getFilterRows</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  worksheetId<span class="token punctuation">,</span>
+  viewId<span class="token punctuation">,</span>
+  appId<span class="token punctuation">,</span>
+  <span class="token literal-property property">fastFilters</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 快速过滤条件</span>
+  <span class="token literal-property property">navGroupFilters</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 导航分组过滤</span>
+  <span class="token literal-property property">filtersGroup</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 分组过滤</span>
+  <span class="token literal-property property">pageIndex</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">pageSize</span><span class="token operator">:</span> <span class="token number">50</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 返回: &#123; data: [], count: 100 &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="获取行详情"><a href="#获取行详情" class="headerlink" title="获取行详情"></a>获取行详情</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getRowDetail</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  appId<span class="token punctuation">,</span>
+  worksheetId<span class="token punctuation">,</span>
+  rowId<span class="token punctuation">,</span>
+  <span class="token literal-property property">getTemplate</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token comment">// 是否返回模板控件</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 返回: &#123; rowData (JSON字符串), templateControls &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="更新行数据"><a href="#更新行数据" class="headerlink" title="更新行数据"></a>更新行数据</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">await</span> <span class="token function">updateWorksheetRow</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  appId<span class="token punctuation">,</span>
+  worksheetId<span class="token punctuation">,</span>
+  rowId<span class="token punctuation">,</span>
+  <span class="token literal-property property">newOldControl</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// 要更新的控件</span>
+    <span class="token punctuation">&#123;</span>controlId<span class="token punctuation">,</span> <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token string">"新值"</span><span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="新增行"><a href="#新增行" class="headerlink" title="新增行"></a>新增行</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">addWorksheetRow</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  appId<span class="token punctuation">,</span>
+  worksheetId<span class="token punctuation">,</span>
+  viewId<span class="token punctuation">,</span>
+  <span class="token literal-property property">receiveControls</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 控件值数组</span>
+  <span class="token literal-property property">rowStatus</span><span class="token operator">:</span> <span class="token number">1</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 返回: &#123; data: &#123; rowid &#125; &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="获取关联表行数据"><a href="#获取关联表行数据" class="headerlink" title="获取关联表行数据"></a>获取关联表行数据</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getRowRelationRows</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  worksheetId<span class="token punctuation">,</span> <span class="token comment">// 主表工作表ID</span>
+  rowId<span class="token punctuation">,</span> <span class="token comment">// 主表行ID</span>
+  controlId<span class="token punctuation">,</span> <span class="token comment">// 关联字段ID</span>
+  <span class="token literal-property property">getWorksheet</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">pageIndex</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">pageSize</span><span class="token operator">:</span> <span class="token number">1000</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="获取关联表工作表信息"><a href="#获取关联表工作表信息" class="headerlink" title="获取关联表工作表信息"></a>获取关联表工作表信息</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 1. 先获取关联工作表信息</span>
+<span class="token keyword">const</span> relationControl <span class="token operator">=</span> controls<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">c</span><span class="token punctuation">)</span> <span class="token operator">=></span> c<span class="token punctuation">.</span>alias <span class="token operator">===</span> <span class="token string">"xxx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> worksheetInfo <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getWorksheetInfo</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">worksheetId</span><span class="token operator">:</span> relationControl<span class="token punctuation">.</span>dataSource
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 2. 找到名称字段</span>
+<span class="token keyword">const</span> nameField <span class="token operator">=</span> worksheetInfo<span class="token punctuation">.</span>template<span class="token punctuation">.</span>controls<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">c</span><span class="token punctuation">)</span> <span class="token operator">=></span> c<span class="token punctuation">.</span>alias <span class="token operator">===</span> <span class="token string">"name"</span> <span class="token operator">||</span> c<span class="token punctuation">.</span>controlName <span class="token operator">===</span> <span class="token string">"名称"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 3. 获取数据</span>
+<span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getFilterRows</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">worksheetId</span><span class="token operator">:</span> relationControl<span class="token punctuation">.</span>dataSource<span class="token punctuation">,</span>
+  <span class="token literal-property property">pageIndex</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">pageSize</span><span class="token operator">:</span> <span class="token number">1000</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 4. 组装选项</span>
+<span class="token keyword">const</span> options <span class="token operator">=</span> result<span class="token punctuation">.</span>data<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">row</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">sid</span><span class="token operator">:</span> row<span class="token punctuation">.</span>rowid<span class="token punctuation">,</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> row<span class="token punctuation">[</span>nameField<span class="token punctuation">.</span>controlId<span class="token punctuation">]</span> <span class="token operator">||</span> row<span class="token punctuation">.</span>rowid
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="8-事件监听"><a href="#8-事件监听" class="headerlink" title="8. 事件监听"></a>8. 事件监听</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 监听过滤条件变化</span>
+md_emitter<span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span><span class="token string">"filters-update"</span><span class="token punctuation">,</span> handleFiltersUpdate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 监听新增记录</span>
+md_emitter<span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span><span class="token string">"new-record"</span><span class="token punctuation">,</span> handleAddRecord<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 记得在组件卸载时移除</span>
+md_emitter<span class="token punctuation">.</span><span class="token function">removeListener</span><span class="token punctuation">(</span><span class="token string">"filters-update"</span><span class="token punctuation">,</span> handleFiltersUpdate<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="9-控件类型完整处理"><a href="#9-控件类型完整处理" class="headerlink" title="9. 控件类型完整处理"></a>9. 控件类型完整处理</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+<th>存储格式</th>
+<th>取值方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td>文本</td>
+<td>字符串</td>
+<td>直接使用</td>
+</tr>
+<tr>
+<td>3</td>
+<td>手机</td>
+<td>字符串</td>
+<td>直接使用</td>
+</tr>
+<tr>
+<td>5</td>
+<td>邮箱</td>
+<td>字符串</td>
+<td>直接使用</td>
+</tr>
+<tr>
+<td>6</td>
+<td>数值</td>
+<td>数字</td>
+<td>Number(value)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>证件</td>
+<td>字符串</td>
+<td>直接使用</td>
+</tr>
+<tr>
+<td>8</td>
+<td>金额</td>
+<td>数字</td>
+<td>Number(value)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>单选(老)</td>
+<td>JSON数组</td>
+<td>JSON.parse(v)[0]</td>
+</tr>
+<tr>
+<td>10</td>
+<td>多选</td>
+<td>JSON数组</td>
+<td>JSON.parse(v)</td>
+</tr>
+<tr>
+<td>11</td>
+<td>单选</td>
+<td>JSON数组</td>
+<td>JSON.parse(v)[0]</td>
+</tr>
+<tr>
+<td>14</td>
+<td>附件</td>
+<td>JSON数组</td>
+<td>JSON.parse(v)[0].viewUrl</td>
+</tr>
+<tr>
+<td>15</td>
+<td>日期</td>
+<td>YYYY-MM-DD</td>
+<td>new Date(value)</td>
+</tr>
+<tr>
+<td>16</td>
+<td>时间</td>
+<td>YYYY-MM-DD HH:mm:ss</td>
+<td>new Date(value)</td>
+</tr>
+<tr>
+<td>22</td>
+<td>分段</td>
+<td>-</td>
+<td>分区标题，只读</td>
+</tr>
+<tr>
+<td>24</td>
+<td>地区</td>
+<td>JSON对象</td>
+<td>JSON.parse(v).name</td>
+</tr>
+<tr>
+<td>25</td>
+<td>大写金额</td>
+<td>数字</td>
+<td>自动转换大写</td>
+</tr>
+<tr>
+<td>26</td>
+<td>成员</td>
+<td>JSON数组</td>
+<td>JSON.parse(v)[0].fullname</td>
+</tr>
+<tr>
+<td>27</td>
+<td>部门</td>
+<td>JSON数组</td>
+<td>JSON.parse(v)[0].departmentName</td>
+</tr>
+<tr>
+<td>28</td>
+<td>等级</td>
+<td>数字</td>
+<td>1-5</td>
+</tr>
+<tr>
+<td>29</td>
+<td>关联表</td>
+<td>JSON数组</td>
+<td>JSON.parse(v)[0].name/sid</td>
+</tr>
+<tr>
+<td>30</td>
+<td>关联文本</td>
+<td>字符串</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>31</td>
+<td>公式</td>
+<td>计算结果</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>32</td>
+<td>文本组合</td>
+<td>对象/字符串</td>
+<td>JSON处理</td>
+</tr>
+<tr>
+<td>33</td>
+<td>自动编号</td>
+<td>字符串</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>34</td>
+<td>子表</td>
+<td>操作列表JSON</td>
+<td>见第6节</td>
+</tr>
+<tr>
+<td>36</td>
+<td>检查项</td>
+<td>0/1</td>
+<td>Boolean(value)</td>
+</tr>
+<tr>
+<td>37</td>
+<td>汇总</td>
+<td>数字</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>40</td>
+<td>定位</td>
+<td>JSON对象</td>
+<td>JSON.parse(v).address</td>
+</tr>
+<tr>
+<td>41</td>
+<td>富文本</td>
+<td>字符串/HTML</td>
+<td>textarea编辑</td>
+</tr>
+<tr>
+<td>42</td>
+<td>签名</td>
+<td>图片URL</td>
+<td>自定义签名组件</td>
+</tr>
+<tr>
+<td>46</td>
+<td>时间选择</td>
+<td>HH:mm:ss</td>
+<td>格式化时间</td>
+</tr>
+<tr>
+<td>47</td>
+<td>条码</td>
+<td>字符串</td>
+<td>扫描输入</td>
+</tr>
+<tr>
+<td>48</td>
+<td>组织角色</td>
+<td>JSON数组</td>
+<td>JSON.parse(v)[0].organizeName</td>
+</tr>
+<tr>
+<td>50</td>
+<td>关联记录</td>
+<td>JSON数组</td>
+<td>JSON.parse(v)[0].name</td>
+</tr>
+<tr>
+<td>52</td>
+<td>定位v2</td>
+<td>JSON对象</td>
+<td>JSON.parse(v).address</td>
+</tr>
+<tr>
+<td>53</td>
+<td>公式v2</td>
+<td>计算结果</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>54</td>
+<td>附件v2</td>
+<td>JSON数组</td>
+<td>JSON.parse(v)[0].viewUrl</td>
+</tr>
+</tbody></table>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><pre class="line-numbers language-none"><code class="language-none">
+
+
+
+查询当前工作表关联表字段配置(关联表别名)
+const gyljControl &#x3D; controls &amp;&amp; controls.find((control) &#x3D;&gt; control.alias &#x3D;&#x3D;&#x3D; &quot;gylj&quot;);
+查看子工作表详情
+ const gyljInfo &#x3D; await getWorksheetInfo(&#123;
+      worksheetId: gyljControl.dataSource
+    &#125;);
+获取关联表数据
+    const gyljResult &#x3D; await getRowRelationRows(&#123;
+      controlId: gyljControl.controlId(关联字段id),
+      rowId: &#39;传入当前行id&#39;,
+      worksheetId:&#39;当前工作表id&#39;,
+      getWorksheet: true,
+      pageIndex: 1,
+      pageSize: 1000
+    &#125;);
+
+
+保存关联表数据
+&#123;
+    &quot;silent&quot;: true,
+    &quot;receiveControls&quot;: [
+        &#123;
+            &quot;controlId&quot;: &quot;69548e6cdc2432166c3b27ea&quot;,
+            &quot;type&quot;: 16,
+            &quot;value&quot;: &quot;2025-12-31 15:06:00&quot;,
+            &quot;controlName&quot;: &quot;面试开始时间&quot;,
+            &quot;dot&quot;: 0
+        &#125;,
+        &#123;
+            &quot;controlId&quot;: &quot;69548e6cdc2432166c3b27eb&quot;,
+            &quot;type&quot;: 16,
+            &quot;value&quot;: &quot;2025-12-31 15:06:00&quot;,
+            &quot;controlName&quot;: &quot;面试结束时间&quot;,
+            &quot;dot&quot;: 0
+        &#125;,
+        &#123;
+            &quot;controlId&quot;: &quot;69548fb4dc2432166c3b3251&quot;,
+            &quot;type&quot;: 29,
+            &quot;value&quot;: &quot;[&#123;\&quot;name\&quot;:\&quot;崔静\&quot;,\&quot;sid\&quot;:\&quot;799e9e73-1653-4ae8-9632-dbc630cd236e\&quot;&#125;]&quot;,
+            &quot;controlName&quot;: &quot;求职者&quot;,
+            &quot;dot&quot;: 0
+        &#125;
+    ],
+    &quot;appId&quot;: &quot;8fbcdd3f-4d78-4272-a79f-0b557cac4b2d&quot;,
+    &quot;projectId&quot;: &quot;fd7cfa1f-44a1-432f-9a60-5d4ea6000e26&quot;,
+    &quot;worksheetId&quot;: &quot;69548d0df03728c888b1edce&quot;,
+    &quot;pushUniqueId&quot;: &quot;1767164769328&quot;,
+    &quot;rowStatus&quot;: 1
+&#125;
+
+修改行
+const apiParams &#x3D; &#123;
+          appId: appId,
+          worksheetId: stepWorksheetId,
+          rowId: rowid,
+          newOldControl: newOldControl
+        &#125;;
+        updateWorksheetRow(apiParams);
+新增行
+addWorksheetRow(&#123;
+    &quot;silent&quot;: true,
+    &quot;receiveControls&quot;: [],
+    &quot;appId&quot;: &quot;1a06a053-83c6-4633-bf3e-7992c336d9ee&quot;,
+    &quot;projectId&quot;: &quot;5588343c-4eed-48e6-914f-d3ea404244a7&quot;,
+    &quot;viewId&quot;: &quot;67f8c351f010d86f37218895&quot;,
+    &quot;worksheetId&quot;: &quot;67f8c351f010d86f37218894&quot;,
+    &quot;pushUniqueId&quot;: &quot;1766989152974&quot;,
+    &quot;rowStatus&quot;: 1
+&#125;
+)
+
+
+查子表数据
+async function init() &#123;
+  try &#123;
+    let gylxGyljControl &#x3D; controls.find((control) &#x3D;&gt; control.alias &#x3D;&#x3D;&#x3D; &quot;gylj&quot;);
+    const gyljInfo &#x3D; await getWorksheetInfo(&#123;
+      worksheetId: gylxGyljControl.dataSource
+    &#125;);
+    gyljControls.value &#x3D; gyljInfo.template.controls;
+    if (!env.show_field || !Array.isArray(env.show_field)) &#123;
+      ElMessage.error(&quot;请选择显示字段&quot;);
+      tableLoading.value &#x3D; false;
+      return;
+    &#125;
+    console.log(env.show_field, &quot;咋回事&quot;);
+    if (controls &amp;&amp; Array.isArray(controls)) &#123;
+      tableColumns.value &#x3D; controls.filter((control) &#x3D;&gt; env.show_field.includes(control.controlId));
+      if (tableColumns.value.length &#x3D;&#x3D;&#x3D; 0) &#123;
+        ElMessage.warning(&quot;当前配置下没有可显示的字段&quot;);
+        tableLoading.value &#x3D; false;
+      &#125;
+    &#125;
+  &#125; catch (error) &#123;
+    ElMessage.error(&quot;获取表格信息失败&quot;);
+  &#125; finally &#123;
+    loadTableData();
+  &#125;
+&#125;
+
+保存关联表数据
+&#123;
+    &quot;silent&quot;: true,
+    &quot;receiveControls&quot;: [
+        &#123;
+            &quot;controlId&quot;: &quot;69548e6cdc2432166c3b27ea&quot;,
+            &quot;type&quot;: 16,
+            &quot;value&quot;: &quot;2025-12-31 15:06:00&quot;,
+            &quot;controlName&quot;: &quot;面试开始时间&quot;,
+            &quot;dot&quot;: 0
+        &#125;,
+        &#123;
+            &quot;controlId&quot;: &quot;69548e6cdc2432166c3b27eb&quot;,
+            &quot;type&quot;: 16,
+            &quot;value&quot;: &quot;2025-12-31 15:06:00&quot;,
+            &quot;controlName&quot;: &quot;面试结束时间&quot;,
+            &quot;dot&quot;: 0
+        &#125;,
+        &#123;
+            &quot;controlId&quot;: &quot;69548fb4dc2432166c3b3251&quot;,
+            &quot;type&quot;: 29,
+            &quot;value&quot;: &quot;[&#123;\&quot;name\&quot;:\&quot;崔静\&quot;,\&quot;sid\&quot;:\&quot;799e9e73-1653-4ae8-9632-dbc630cd236e\&quot;&#125;]&quot;,
+            &quot;controlName&quot;: &quot;求职者&quot;,
+            &quot;dot&quot;: 0
+        &#125;
+    ],
+    &quot;appId&quot;: &quot;8fbcdd3f-4d78-4272-a79f-0b557cac4b2d&quot;,
+    &quot;projectId&quot;: &quot;fd7cfa1f-44a1-432f-9a60-5d4ea6000e26&quot;,
+    &quot;worksheetId&quot;: &quot;69548d0df03728c888b1edce&quot;,
+    &quot;pushUniqueId&quot;: &quot;1767164769328&quot;,
+    &quot;rowStatus&quot;: 1
+&#125;
+
+
+
+
+修改行
+const apiParams &#x3D; &#123;
+          appId: appId,
+          worksheetId: stepWorksheetId,
+          rowId: rowid,
+          newOldControl: newOldControl
+        &#125;;
+        updateWorksheetRow(apiParams);
+新增行
+addWorksheetRow(&#123;
+    &quot;silent&quot;: true,
+    &quot;receiveControls&quot;: [],
+    &quot;appId&quot;: &quot;1a06a053-83c6-4633-bf3e-7992c336d9ee&quot;,
+    &quot;projectId&quot;: &quot;5588343c-4eed-48e6-914f-d3ea404244a7&quot;,
+    &quot;viewId&quot;: &quot;67f8c351f010d86f37218895&quot;,
+    &quot;worksheetId&quot;: &quot;67f8c351f010d86f37218894&quot;,
+    &quot;pushUniqueId&quot;: &quot;1766989152974&quot;,
+    &quot;rowStatus&quot;: 1
+&#125;
+)
+
+
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;el-table v-loading&#x3D;&quot;tableLoading&quot; border row-key&#x3D;&quot;rowid&quot; :data&#x3D;&quot;tableData&quot;&gt;
+      &lt;el-table-column
+        show-overflow-tooltip
+        v-for&#x3D;&quot;column in tableColumns&quot;
+        :key&#x3D;&quot;column.controlId&quot;
+        :label&#x3D;&quot;column.controlName&quot;
+        :min-width&#x3D;&quot;column.controlId &#x3D;&#x3D;&#x3D; &#39;rowid&#39; ? 180 : 150&quot;
+      &gt;
+        &lt;template #default&#x3D;&quot;scope&quot;&gt;
+          &lt;span v-if&#x3D;&quot;column.controlId &#x3D;&#x3D;&#x3D; &#39;rowid&#39;&quot;&gt;
+            &lt;el-tooltip placement&#x3D;&quot;top&quot; :content&#x3D;&quot;scope.row.rowid&quot;&gt;
+              &lt;el-tag type&#x3D;&quot;info&quot;&gt;&#123;&#123; scope.row.rowid &#125;&#125;&lt;&#x2F;el-tag&gt;
+            &lt;&#x2F;el-tooltip&gt;
+          &lt;&#x2F;span&gt;
+          &lt;span v-else-if&#x3D;&quot;column.type &#x3D;&#x3D;&#x3D; 34&quot;&gt;
+            &lt;el-button link size&#x3D;&quot;small&quot; type&#x3D;&quot;primary&quot; @click&#x3D;&quot;itemSubRef.openItemSub(scope.row, column)&quot;&gt;
+              子表数据（&#123;&#123; scope.row[column.controlId] || 0 &#125;&#125;）
+            &lt;&#x2F;el-button&gt;
+          &lt;&#x2F;span&gt;
+          &lt;span v-else&gt;
+            &lt;span&gt;&#123;&#123; formatCellValue(scope.row[column.controlId], column.type, column) &#125;&#125;&lt;&#x2F;span&gt;
+          &lt;&#x2F;span&gt;
+        &lt;&#x2F;template&gt;
+      &lt;&#x2F;el-table-column&gt;
+      &lt;el-table-column label&#x3D;&quot;操作&quot; width&#x3D;&quot;120&quot; fixed&#x3D;&quot;right&quot;&gt;
+        &lt;template #default&#x3D;&quot;scope&quot;&gt;
+          &lt;el-button link size&#x3D;&quot;small&quot; type&#x3D;&quot;warning&quot; @click&#x3D;&quot;handleExecute(scope.row)&quot;&gt; 生产 &lt;&#x2F;el-button&gt;
+        &lt;&#x2F;template&gt;
+      &lt;&#x2F;el-table-column&gt;
+    &lt;&#x2F;el-table&gt;
+    &lt;div class&#x3D;&quot;table-data__pagination&quot;&gt;
+      &lt;el-pagination
+        v-model:current-page&#x3D;&quot;pagination.currentPage&quot;
+        v-model:page-size&#x3D;&quot;pagination.pageSize&quot;
+        layout&#x3D;&quot;total, sizes, prev, pager, next, jumper&quot;
+        :total&#x3D;&quot;pagination.total&quot;
+        :page-sizes&#x3D;&quot;[10, 20, 50, 100, 200]&quot;
+        :background&#x3D;&quot;true&quot;
+        @size-change&#x3D;&quot;handleSizeChange&quot;
+        @current-change&#x3D;&quot;handleCurrentChange&quot;
+      &gt;
+      &lt;&#x2F;el-pagination&gt;
+    &lt;&#x2F;div&gt;
+    &lt;!-- 工序执行弹窗 --&gt;
+    &lt;ProcessExecutionModal
+      v-model:visible&#x3D;&quot;showExecutionModal&quot;
+      :current-record&#x3D;&quot;currentExecuteRecord&quot;
+      :worksheet-info&#x3D;&quot;selectedWorksheetInfo&quot;
+      :worksheet-id&#x3D;&quot;selectedWorksheetId&quot;
+      :controls&#x3D;&quot;currentTableControls&quot;
+      @close&#x3D;&quot;handleExecutionClose&quot;
+      @confirm&#x3D;&quot;handleExecutionConfirm&quot;
+    &#x2F;&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script setup&gt;
+import &#123;config, env, api, apis, md_emitter&#125; from &quot;mdye&quot;;
+import &#123;ref, reactive, watch, onMounted, nextTick, onUnmounted&#125; from &quot;vue&quot;;
+const &#123;appId, worksheetId, viewId, controls&#125; &#x3D; config;
+import ProcessExecutionModal from &quot;.&#x2F;ProcessExecutionModal.vue&quot;;
+console.log(config, env);
+import &#123;ElMessage&#125; from &quot;element-plus&quot;;
+const &#123;getWorksheetInfo, getFilterRows, getRowRelationRows&#125; &#x3D; api;
+&#x2F;&#x2F; 表格数据相关
+
+const tableColumns &#x3D; ref([]);
+const tableLoading &#x3D; ref(false);
+const tableData &#x3D; ref([]);
+&#x2F;&#x2F; 分页
+const pagination &#x3D; reactive(&#123;
+  currentPage: 1,
+  pageSize: 50,
+  total: 0
+&#125;);
+&#x2F;&#x2F; 执行模态框相关
+const showExecutionModal &#x3D; ref(false);
+const currentExecuteRecord &#x3D; ref(null);
+const currentTableControls &#x3D; ref([]);
+const selectedWorksheetInfo &#x3D; ref(null);
+const selectedWorksheetId &#x3D; ref(null);
+
+&#x2F;&#x2F; 过滤条件
+let filters &#x3D; [];
+let navGroupFilters &#x3D; [];
+let filtersGroup &#x3D; [];
+&#x2F;&#x2F; 处理执行模态框关闭
+function handleExecutionClose() &#123;
+  showExecutionModal.value &#x3D; false;
+  currentExecuteRecord.value &#x3D; null;
+  currentTableControls.value &#x3D; [];
+&#125;
+&#x2F;&#x2F; 获取表格数据
+async function loadTableData() &#123;
+  tableLoading.value &#x3D; true;
+  try &#123;
+    const res &#x3D; await getFilterRows(&#123;
+      worksheetId,
+      viewId,
+      fastFilters: filters ? filters : [],
+      navGroupFilters: navGroupFilters ? navGroupFilters : [],
+      filtersGroup: filtersGroup ? filtersGroup : [],
+      pageIndex: pagination.currentPage,
+      pageSize: pagination.pageSize
+    &#125;);
+    if (res &amp;&amp; res.data) &#123;
+      tableData.value &#x3D; res.data;
+      pagination.total &#x3D; res.count;
+    &#125;
+  &#125; catch (error) &#123;
+    ElMessage.error(&quot;获取表格数据失败&quot;);
+  &#125; finally &#123;
+    tableLoading.value &#x3D; false;
+  &#125;
+&#125;
+
+&#x2F;&#x2F; 执行记录功能
+async function handleExecute(record) &#123;
+  debugger;
+  try &#123;
+    &#x2F;&#x2F; 设置当前要执行的记录和表控件信息
+    currentExecuteRecord.value &#x3D; record;
+    currentTableControls.value &#x3D; [...tableColumns.value]; &#x2F;&#x2F; 创建副本确保数据完整性
+    &#x2F;&#x2F; 延迟打开执行模态框，确保所有数据传递完成
+    await nextTick();
+    showExecutionModal.value &#x3D; true;
+  &#125; catch (error) &#123;
+    console.error(&quot;执行记录时发生错误:&quot;, error);
+    ElMessage.error(&quot;执行记录时发生错误&quot;);
+    record._executing &#x3D; false;
+  &#125; finally &#123;
+    &#x2F;&#x2F; 重置执行状态
+    if (record._executing) &#123;
+      record._executing &#x3D; false;
+    &#125;
+  &#125;
+&#125;
+
+&#x2F;&#x2F; 处理执行确认
+function handleExecutionConfirm(data) &#123;
+  try &#123;
+    console.log(&quot;执行确认:&quot;, data);
+
+    &#x2F;&#x2F; TODO: 调用实际的执行API
+    &#x2F;&#x2F; const result &#x3D; await executeProcess(&#123;
+    &#x2F;&#x2F;   record: data.record,
+    &#x2F;&#x2F;   processRoute: data.processRouteData,
+    &#x2F;&#x2F;   worksheetId: selectedWorksheetId.value
+    &#x2F;&#x2F; &#125;)
+
+    &#x2F;&#x2F; TODO: 处理执行结果
+    &#x2F;&#x2F; if (result.success) &#123;
+    &#x2F;&#x2F;   &#x2F;&#x2F; 更新记录状态
+    &#x2F;&#x2F;   record._executed &#x3D; true
+    &#x2F;&#x2F;   record._executeTime &#x3D; new Date()
+    &#x2F;&#x2F;   &#x2F;&#x2F; 刷新数据
+    &#x2F;&#x2F;   loadRecords()
+    &#x2F;&#x2F;   showExecutionModal.value &#x3D; false
+    &#x2F;&#x2F; &#125; else &#123;
+    &#x2F;&#x2F;   console.error(&#39;执行失败:&#39;, result.error)
+    &#x2F;&#x2F;   &#x2F;&#x2F; 显示错误信息
+    &#x2F;&#x2F; &#125;
+
+    &#x2F;&#x2F; 临时实现：关闭模态框
+    showExecutionModal.value &#x3D; false;
+  &#125; catch (error) &#123;
+    console.error(&quot;处理执行确认时发生错误:&quot;, error);
+    ElMessage.error(&quot;处理执行确认时发生错误&quot;);
+  &#125;
+&#125;
+
+&#x2F;&#x2F; 初始化
+async function init() &#123;
+  try &#123;
+    debugger;
+    if (!env.show_field || !Array.isArray(env.show_field)) &#123;
+      ElMessage.error(&quot;请选择显示字段&quot;);
+      tableLoading.value &#x3D; false;
+      return;
+    &#125;
+    if (controls &amp;&amp; Array.isArray(controls)) &#123;
+      tableColumns.value &#x3D; controls.filter((control) &#x3D;&gt; env.show_field.includes(control.controlId));
+      if (tableColumns.value.length &#x3D;&#x3D;&#x3D; 0) &#123;
+        ElMessage.warning(&quot;当前配置下没有可显示的字段&quot;);
+        tableLoading.value &#x3D; false;
+      &#125;
+    &#125;
+  &#125; catch (error) &#123;
+    ElMessage.error(&quot;获取表格信息失败&quot;);
+  &#125; finally &#123;
+    loadTableData();
+  &#125;
+&#125;
+&#x2F;**
+ * 过滤条件更新回调
+ * @param value 过滤条件数据
+ *&#x2F;
+const handleFiltersUpdate &#x3D; (value) &#x3D;&gt; &#123;
+  filters &#x3D; value.fastFilters;
+  navGroupFilters &#x3D; value.navGroupFilters;
+  filtersGroup &#x3D; value.filtersGroup;
+  loadTableData();
+&#125;;
+
+&#x2F;**
+ * 格式化单元格值
+ *&#x2F;
+function formatCellValue(value, type, control &#x3D; null) &#123;
+  if (value &#x3D;&#x3D;&#x3D; null || value &#x3D;&#x3D;&#x3D; undefined || value &#x3D;&#x3D;&#x3D; &quot;&quot;) &#123;
+    return &quot;-&quot;;
+  &#125;
+  try &#123;
+    switch (type) &#123;
+      case 15: &#x2F;&#x2F; 日期
+        return new Date(value).toLocaleDateString();
+      case 16: &#x2F;&#x2F; 时间
+        return new Date(value).toLocaleString();
+      case 3: &#x2F;&#x2F; 数字
+        return Number(value).toLocaleString();
+      case 29: &#x2F;&#x2F; 关联表
+        if (value) &#123;
+          const arrayObjects &#x3D; JSON.parse(value);
+          &#x2F;&#x2F; 空值处理：确保arrayObjects是数组
+          if (Array.isArray(arrayObjects) &amp;&amp; arrayObjects.length &#x3D;&#x3D;&#x3D; 0) &#123;
+            return &quot;&quot;;
+          &#125;
+          if (!Array.isArray(arrayObjects)) &#123;
+            return value;
+          &#125;
+          &#x2F;&#x2F; 返回所有关联记录的名称，用逗号拼接
+          return arrayObjects.map((item) &#x3D;&gt; item.name || item.title || &quot;-&quot;).join(&quot;, &quot;);
+        &#125;
+        break;
+      case 11: &#x2F;&#x2F; 单选
+        if (value &amp;&amp; control?.options) &#123;
+          const arrayObjects &#x3D; JSON.parse(value);
+          &#x2F;&#x2F; 空值处理：确保arrayObjects是数组
+          if (!Array.isArray(arrayObjects) || arrayObjects.length &#x3D;&#x3D;&#x3D; 0) &#123;
+            return &quot;-&quot;;
+          &#125;
+          const optionObj &#x3D; control.options.find((item) &#x3D;&gt; item.key &#x3D;&#x3D;&#x3D; arrayObjects[0]);
+          return optionObj?.value || &quot;-&quot;;
+        &#125;
+        break;
+      case 10: &#x2F;&#x2F; 多选
+        if (value &amp;&amp; control?.options) &#123;
+          const arrayObjects &#x3D; JSON.parse(value);
+          &#x2F;&#x2F; 空值处理：确保arrayObjects是数组
+          if (!Array.isArray(arrayObjects) || arrayObjects.length &#x3D;&#x3D;&#x3D; 0) &#123;
+            return &quot;-&quot;;
+          &#125;
+          const optionObjs &#x3D; arrayObjects
+            .map((id) &#x3D;&gt; &#123;
+              return control.options.find((item) &#x3D;&gt; item.key &#x3D;&#x3D;&#x3D; id);
+            &#125;)
+            .filter(Boolean);
+          return optionObjs.map((option) &#x3D;&gt; option.value).join(&quot;, &quot;);
+        &#125;
+        break;
+      case 26: &#x2F;&#x2F; 成员
+        if (value) &#123;
+          const arrayObjects &#x3D; JSON.parse(value);
+          &#x2F;&#x2F; 空值处理：确保arrayObjects是数组
+          if (!Array.isArray(arrayObjects) || arrayObjects.length &#x3D;&#x3D;&#x3D; 0) &#123;
+            return &quot;-&quot;;
+          &#125;
+          &#x2F;&#x2F; 返回所有成员姓名，用逗号拼接
+          return arrayObjects.map((member) &#x3D;&gt; member.fullname || member.accountId || &quot;-&quot;).join(&quot;, &quot;);
+        &#125;
+        break;
+      case 27: &#x2F;&#x2F; 部门
+        if (value) &#123;
+          const arrayObjects &#x3D; JSON.parse(value);
+          &#x2F;&#x2F; 空值处理：确保arrayObjects是数组
+          if (!Array.isArray(arrayObjects) || arrayObjects.length &#x3D;&#x3D;&#x3D; 0) &#123;
+            return &quot;-&quot;;
+          &#125;
+          &#x2F;&#x2F; 返回所有部门名称，用逗号拼接
+          return arrayObjects.map((dept) &#x3D;&gt; dept.departmentName || &quot;-&quot;).join(&quot;, &quot;);
+        &#125;
+        break;
+      case 24: &#x2F;&#x2F; 地区
+        if (value) &#123;
+          const obj &#x3D; JSON.parse(value);
+          if (!obj || obj.length &#x3D;&#x3D;&#x3D; 0) &#123;
+            return &quot;-&quot;;
+          &#125;
+          return obj.name || &quot;-&quot;;
+        &#125;
+        break;
+      case 48: &#x2F;&#x2F; 组织角色
+        if (value) &#123;
+          const arrayObjects &#x3D; JSON.parse(value);
+          &#x2F;&#x2F; 空值处理：确保arrayObjects是数组
+          if (!Array.isArray(arrayObjects) || arrayObjects.length &#x3D;&#x3D;&#x3D; 0) &#123;
+            return &quot;-&quot;;
+          &#125;
+          &#x2F;&#x2F; 返回所有组织角色名称，用逗号拼接
+          return arrayObjects.map((role) &#x3D;&gt; role.organizeName || &quot;-&quot;).join(&quot;, &quot;);
+        &#125;
+        break;
+      case 14: &#x2F;&#x2F; 附件
+        if (value) &#123;
+          const arrayObjects &#x3D; JSON.parse(value);
+          &#x2F;&#x2F; 空值处理：确保arrayObjects是数组
+          if (!Array.isArray(arrayObjects) || arrayObjects.length &#x3D;&#x3D;&#x3D; 0) &#123;
+            return &quot;-&quot;;
+          &#125;
+          &#x2F;&#x2F; 显示所有附件，用逗号分隔
+          return arrayObjects.map((file) &#x3D;&gt; &#96;$&#123;file.originalFilename || &quot;&quot;&#125;$&#123;file.ext || &quot;&quot;&#125;&#96;).join(&quot;, &quot;);
+        &#125;
+        break;
+      case 42: &#x2F;&#x2F; 签名
+        if (value) &#123;
+          return &quot;[签名图片]&quot;;
+        &#125;
+        break;
+      case 40: &#x2F;&#x2F; 定位
+        if (value) &#123;
+          const obj &#x3D; JSON.parse(value);
+          if (!obj || obj.length &#x3D;&#x3D;&#x3D; 0) &#123;
+            return &quot;-&quot;;
+          &#125;
+          return obj.address || &quot;-&quot;;
+        &#125;
+        break;
+      case 34: &#x2F;&#x2F; 子表
+        &#x2F;&#x2F; 在主表格中显示为子表记录数
+        if (value) &#123;
+          return &#96;子表 ($&#123;value&#125;条)&#96;;
+        &#125;
+        return &quot;子表 (0条)&quot;;
+      default:
+        return String(value || &quot;&quot;);
+    &#125;
+  &#125; catch (error) &#123;
+    console.warn(&quot;格式化单元格值失败:&quot;, error, &quot;value:&quot;, value, &quot;type:&quot;, type);
+    return String(value || &quot;&quot;);
+  &#125;
+&#125;
+
+&#x2F;**
+ * 新增记录更新回调
+ * @param value 新增记录数据
+ *&#x2F;
+const handleAddRecord &#x3D; (value) &#x3D;&gt; &#123;
+  navGroupFilters &#x3D; value.navGroupFilters;
+  loadTableData();
+&#125;;
+onMounted(() &#x3D;&gt; &#123;
+  init();
+  md_emitter.addListener(&quot;filters-update&quot;, handleFiltersUpdate);
+  md_emitter.addListener(&quot;new-record&quot;, handleAddRecord);
+&#125;);
+
+onUnmounted(() &#x3D;&gt; &#123;
+  md_emitter.removeListener(&quot;filters-update&quot;, handleFiltersUpdate);
+  md_emitter.removeListener(&quot;new-record&quot;, handleAddRecord);
+&#125;);
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;&lt;&#x2F;style&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="浏览器出现脚本限制"><a href="#浏览器出现脚本限制" class="headerlink" title="浏览器出现脚本限制"></a>浏览器出现脚本限制</h2><pre class="line-numbers language-none"><code class="language-none">start chrome --disable-web-security --user-data-dir&#x3D;&quot;C:\ChromeDevSession&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</div><div class="article-licensing box"><div class="licensing-title"><p>明道云插件开发</p><p><a href="https://zj261788.github.io/2026/04/29/明道云插件开发/">https://zj261788.github.io/2026/04/29/明道云插件开发/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Zhang Jie</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2026-04-29</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-04-30</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/img/zhifubaio.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/img/weix.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2026/04/30/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/"><i class="level-item fas fa-chevron-left"></i><span class="level-item"> </span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2026/04/21/%E6%A0%87%E5%87%86%E6%B5%81%E7%A8%8B%E8%AE%BE%E8%AE%A1%E5%99%A8/"><span class="level-item">标准流程设计器</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.css"><script src="https://cdnjs.loli.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "eb41a6b6a6928989ff40f2935cf97f99",
+            repo: "zj261788.github.io",
+            owner: "zj261788",
+            clientID: "Ov23ct9JCRJDGQUYlI1J",
+            clientSecret: "cdf5c517455379efbc0b9ccde0525b21938bc03e",
+            admin: ["zj261788"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 3,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.jpg" alt="ZJ261788"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">ZJ261788</p><p class="is-size-6 is-block">普普通通的IT打工族</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">62</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">31</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">5</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/zj261788" target="_blank" rel="me noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/zj261788"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#1-导入方式"><span class="level-left"><span class="level-item">1</span><span class="level-item">1. 导入方式</span></span></a></li><li><a class="level is-mobile" href="#2-从-config-获取基本信息"><span class="level-left"><span class="level-item">2</span><span class="level-item">2. 从 config 获取基本信息</span></span></a></li><li><a class="level is-mobile" href="#3-从-api-解构需要的-API-函数"><span class="level-left"><span class="level-item">3</span><span class="level-item">3. 从 api 解构需要的 API 函数</span></span></a></li><li><a class="level is-mobile" href="#4-从-env-获取插件配置"><span class="level-left"><span class="level-item">4</span><span class="level-item">4. 从 env 获取插件配置</span></span></a></li><li><a class="level is-mobile" href="#5-常用-API-调用"><span class="level-left"><span class="level-item">5</span><span class="level-item">5. 常用 API 调用</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#获取工作表信息"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">获取工作表信息</span></span></a></li></ul></li><li><a class="level is-mobile" href="#10-查找控件的方法"><span class="level-left"><span class="level-item">6</span><span class="level-item">10. 查找控件的方法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#获取过滤行数据"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">获取过滤行数据</span></span></a></li><li><a class="level is-mobile" href="#获取行详情"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">获取行详情</span></span></a></li><li><a class="level is-mobile" href="#更新行数据"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">更新行数据</span></span></a></li><li><a class="level is-mobile" href="#新增行"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">新增行</span></span></a></li><li><a class="level is-mobile" href="#获取关联表行数据"><span class="level-left"><span class="level-item">6.5</span><span class="level-item">获取关联表行数据</span></span></a></li><li><a class="level is-mobile" href="#获取关联表工作表信息"><span class="level-left"><span class="level-item">6.6</span><span class="level-item">获取关联表工作表信息</span></span></a></li></ul></li><li><a class="level is-mobile" href="#8-事件监听"><span class="level-left"><span class="level-item">7</span><span class="level-item">8. 事件监听</span></span></a></li><li><a class="level is-mobile" href="#9-控件类型完整处理"><span class="level-left"><span class="level-item">8</span><span class="level-item">9. 控件类型完整处理</span></span></a></li><li><a class="level is-mobile" href="#其它"><span class="level-left"><span class="level-item">9</span><span class="level-item">其它</span></span></a></li><li><a class="level is-mobile" href="#浏览器出现脚本限制"><span class="level-left"><span class="level-item">10</span><span class="level-item">浏览器出现脚本限制</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/avatar.jpg" alt="Jie Growth Diary" height="28"></a><p class="is-size-7"><span>&copy; 2026 Zhang Jie</span><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><p class="is-size-7">2811932734@qq.com</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/zj261788/zj261788.github.io"><i class="fab fa-github"></i></a></p></div><div id="site-runtime"></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><script data-pjax src="/js/click.js" defer></script><script data-pjax src="/js/snow.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>
